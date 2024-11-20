@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bupmrodlohajo"]
 
-[ext_resource type="Script" path="res://core/ikaros_scene.gd" id="1_dq8hd"]
+[ext_resource type="Script" path="res://core/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
 [ext_resource type="Script" path="res://core/player_controller.gd" id="2_4v1bt"]
 [ext_resource type="PackedScene" uid="uid://byueo6oe0tjn7" path="res://game/assets/character.tscn" id="3_k15d2"]
