@@ -4,10 +4,12 @@ extends Node
 
 var _player: IkarosCharacter = null
 
+var _move_command := IkarosCharacterMoveCommand.new()
+
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("move_forward"):
-		_player.move(Vector3.ZERO)
+	if Input.is_action_pressed("move_forward"):
+		_move_command.execute(_player)
 
 
 func _ready() -> void:
