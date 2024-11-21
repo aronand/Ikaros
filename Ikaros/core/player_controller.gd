@@ -8,8 +8,12 @@ var _move_command := IkarosCharacterMoveCommand.new()
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("move_forward"):
-		_move_command.execute(_player)
+	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var direction: Vector3 = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		var move_params := IkarosCharacterMoveCommand.Params.new()
+		move_params.direction = direction
+		_move_command.execute(_player, move_params)
 
 
 func _ready() -> void:

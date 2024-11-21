@@ -2,5 +2,11 @@ class_name IkarosCharacterMoveCommand
 extends IkarosCharacterBaseCommand
 
 
-func execute(character: IkarosCharacter) -> void:
-	character.move(Vector3.FORWARD)
+class Params:
+	var direction: Vector3
+
+
+func execute(character: IkarosCharacter, params: Object = null) -> void:
+	if params is Params:
+		params = params as Params
+		character.move(params.direction)
