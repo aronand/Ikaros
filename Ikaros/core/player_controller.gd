@@ -4,6 +4,7 @@ extends Node
 
 var _player: IkarosCharacter = null
 
+var _jump_command := IkarosCharacterJumpCommand.new()
 var _move_command := IkarosCharacterMoveCommand.new()
 
 
@@ -14,6 +15,9 @@ func _process(delta: float) -> void:
 		var move_params := IkarosCharacterMoveCommand.Params.new()
 		move_params.direction = direction
 		_move_command.execute(_player, move_params)
+	
+	if Input.is_action_just_pressed("jump"):
+		_jump_command.execute(_player)
 
 
 func _ready() -> void:
