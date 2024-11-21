@@ -2,4 +2,5 @@
 
 ## Acknowledgments
 
-* [Godot Unit Test](https://github.com/bitwes/Gut) by bitwes
+* [Godot Jolt](https://github.com/godot-jolt/godot-jolt)
+* [Godot Unit Test](https://github.com/bitwes/Gut)
