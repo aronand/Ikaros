@@ -8,7 +8,7 @@ var _logger: LogStream
 
 
 func _init() -> void:
-	_logger = LogStream.new("PlayerController", LogStream.LogLevel.DEBUG)
+	_logger = LogStream.new("Scene", LogStream.LogLevel.DEBUG)
 
 
 func _ready() -> void:
