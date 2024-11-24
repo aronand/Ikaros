@@ -30,18 +30,7 @@ func attach_camera_to_player() -> void:
 		_logger.warn("Couldn't attach camera to player: Player queued for free.")
 		return
 
+	camera_controller.camera.rotation_degrees.y = 180.0
+	camera_controller.camera.position.z = -4.0
+	camera_controller.camera.position.y = 1.5
 	player.add_child(camera_controller.camera_root)
-
-	## Attach a camera to the player
-	#var camera: Camera3D = Camera3D.new()
-	#camera.current = true
-	#player.add_child(camera)
-#
-	## Move and rotate camera to proper position
-	#var camera_root: Node3D = player.find_child("CameraRoot")
-	#var camera_position: Node3D = player.find_child("CameraPosition")
-	## TODO: Rethink this setup. We could get rid of camera_position by exposing the camera settings
-	## in the editor instead.
-	#camera.position = camera_position.position
-	#camera.position.y = camera_root.position.y
-	#camera.rotation_degrees.y = 180

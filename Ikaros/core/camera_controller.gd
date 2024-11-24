@@ -3,6 +3,7 @@ extends Node
 
 
 var camera_root: Node3D
+var camera: Camera3D
 
 
 func _ready() -> void:
@@ -11,7 +12,7 @@ func _ready() -> void:
 
 
 func _create_camera_root() -> Node3D:
-	var camera_root: Node3D = Node3D.new()
-	var camera: Camera3D = Camera3D.new()
+	camera_root = Node3D.new()
+	camera = Camera3D.new()
 	camera_root.add_child(camera)
 	return camera_root
