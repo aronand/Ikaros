@@ -8,7 +8,7 @@ var _logger: LogStream
 
 
 func _init() -> void:
-	_logger = LogStream.new("Scene", LogStream.LogLevel.DEBUG)
+	_logger = Ikaros.get_logger("Scene")
 
 
 func _ready() -> void:
