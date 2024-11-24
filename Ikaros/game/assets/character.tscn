@@ -30,12 +30,6 @@ shape = SubResource("CapsuleShape3D_51oe4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("CapsuleMesh_o4cnb")
 
-[node name="CameraRoot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
-
-[node name="CameraPosition" type="Node3D" parent="CameraRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
 [node name="Eyes" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.365473, 0, 0, 0, 0.222278, 0, 0, 0, 0.167722, 0, 1.30116, 0.348212)
 mesh = SubResource("BoxMesh_owsm4")
