@@ -2,10 +2,16 @@ class_name PlayerController
 extends Node
 
 
-var _player: IkarosCharacter = null
+var _player: IkarosCharacter
 
-var _jump_command := IkarosCharacterJumpCommand.new()
-var _move_command := IkarosCharacterMoveCommand.new()
+var _jump_command: IkarosCharacterJumpCommand
+var _move_command: IkarosCharacterMoveCommand
+
+
+func _init() -> void:
+	_player = null
+	_jump_command = IkarosCharacterJumpCommand.new()
+	_move_command = IkarosCharacterMoveCommand.new()
 
 
 func _process(delta: float) -> void:
