@@ -2,5 +2,5 @@ class_name IkarosCharacterJumpCommand
 extends IkarosCharacterBaseCommand
 
 
-func execute(character: IkarosCharacter, params: Object = null) -> void:
+func execute(character: IkarosCharacter, _params: Object = null) -> void:
 	character.jump()

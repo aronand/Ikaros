@@ -11,5 +11,5 @@ class Params:
 
 func execute(character: IkarosCharacter, params: Object = null) -> void:
 	if params is Params:
-		params = params as Params
-		character.move(params.direction)
+		var move_params: Params = params as Params
+		character.move(move_params.direction)

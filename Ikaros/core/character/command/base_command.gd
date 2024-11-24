@@ -2,5 +2,5 @@ class_name IkarosCharacterBaseCommand
 extends Object
 
 
-func execute(character: IkarosCharacter, params: Object = null) -> void:
+func execute(_character: IkarosCharacter, _params: Object = null) -> void:
 	pass
