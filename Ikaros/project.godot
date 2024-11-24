@@ -16,6 +16,10 @@ run/main_scene="res://game/levels/movement_gym.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Log="*res://addons/logger/logger.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1
@@ -28,7 +32,7 @@ gdscript/warnings/return_value_discarded=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/logger/plugin.cfg")
 
 [global_group]
 
