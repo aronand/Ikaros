@@ -5,6 +5,7 @@ extends Node
 @export var player: IkarosCharacter
 
 var _logger: LogStream
+var camera_controller: IkarosCameraController
 
 
 func _init() -> void:
@@ -12,6 +13,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	camera_controller = find_children("", "IkarosCameraController")[0]  # CRITICAL: Major assumption
+
 	if player == null:
 		_logger.warn("Player not defined in scene")
 	else:
@@ -27,12 +30,7 @@ func attach_camera_to_player() -> void:
 		_logger.warn("Couldn't attach camera to player: Player queued for free.")
 		return
 
-	# Attach a camera to the player
-	var camera: Camera3D = Camera3D.new()
-	camera.current = true
-	player.add_child(camera)
-
-	# Move and rotate camera to proper position
-	var camera_position: Node3D = player.find_child("CameraPosition")
-	camera.position = camera_position.position
-	camera.rotation_degrees.y = 180
+	camera_controller.camera.rotation_degrees.y = 180.0
+	camera_controller.camera.position.z = -4.0
+	camera_controller.camera.position.y = 1.5
+	player.add_child(camera_controller.camera_root)

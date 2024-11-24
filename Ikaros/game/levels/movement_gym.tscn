@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bupmrodlohajo"]
+[gd_scene load_steps=9 format=3 uid="uid://bupmrodlohajo"]
 
 [ext_resource type="Script" path="res://core/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
 [ext_resource type="Script" path="res://core/player_controller.gd" id="2_4v1bt"]
+[ext_resource type="Script" path="res://core/camera_controller.gd" id="2_q73t8"]
 [ext_resource type="PackedScene" uid="uid://byueo6oe0tjn7" path="res://game/assets/character.tscn" id="3_k15d2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a575k"]
@@ -23,6 +24,9 @@ glow_enabled = true
 [node name="MovementGym" type="Node" node_paths=PackedStringArray("player")]
 script = ExtResource("1_dq8hd")
 player = NodePath("Character")
+
+[node name="IkarosCameraController" type="Node" parent="."]
+script = ExtResource("2_q73t8")
 
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource("2_4v1bt")
