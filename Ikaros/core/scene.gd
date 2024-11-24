@@ -4,19 +4,29 @@ extends Node
 
 @export var player: IkarosCharacter
 
+var _logger: LogStream
+
 
 func _init() -> void:
-	pass
+	_logger = LogStream.new("PlayerController", LogStream.LogLevel.DEBUG)
 
 
 func _ready() -> void:
 	if player == null:
-		printerr("Player not defined in scene")
+		_logger.warn("Player not defined in scene")
 	else:
 		attach_camera_to_player()
 
 
 func attach_camera_to_player() -> void:
+	if player == null:
+		_logger.warn("Couldn't attach camera to player: Player not defined or null in scene.")
+		return
+
+	if player.is_queued_for_deletion():
+		_logger.warn("Couldn't attach camera to player: Player queued for free.")
+		return
+
 	# Attach a camera to the player
 	var camera: Camera3D = Camera3D.new()
 	camera.current = true
