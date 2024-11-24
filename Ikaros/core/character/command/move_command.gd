@@ -5,7 +5,7 @@ extends IkarosCharacterBaseCommand
 class Params:
 	var direction: Vector3
 
-	func _init(direction: Vector3) -> void:
+	func _init(direction: Vector3 = Vector3.ZERO) -> void:
 		self.direction = direction
 
 
