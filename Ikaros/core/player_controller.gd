@@ -21,8 +21,7 @@ func _process(delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector("move_right", "move_left", "move_backward", "move_forward")
 	var direction: Vector3 = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
 	if direction:
-		var move_params := IkarosCharacterMoveCommand.Params.new()
-		move_params.direction = direction
+		var move_params: IkarosCharacterMoveCommand.Params = IkarosCharacterMoveCommand.Params.new(direction)
 		_move_command.execute(_player, move_params)
 	
 	if Input.is_action_just_pressed("jump"):
