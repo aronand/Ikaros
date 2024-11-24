@@ -4,8 +4,9 @@ extends Node
 
 @export var player: IkarosCharacter
 
-var _logger: LogStream
 var camera_controller: IkarosCameraController
+
+var _logger: LogStream
 
 
 func _init() -> void:
