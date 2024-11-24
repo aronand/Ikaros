@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://byueo6oe0tjn7"]
+[gd_scene load_steps=7 format=3 uid="uid://byueo6oe0tjn7"]
 
 [ext_resource type="Script" path="res://core/character/character.gd" id="1_ut8hp"]
 
@@ -14,6 +14,12 @@ material = SubResource("StandardMaterial3D_fk2iw")
 radius = 0.4
 height = 1.8
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dxoy"]
+albedo_color = Color(0.960351, 0.960351, 0.960351, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_owsm4"]
+material = SubResource("StandardMaterial3D_3dxoy")
+
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_ut8hp")
 
@@ -26,3 +32,7 @@ mesh = SubResource("CapsuleMesh_o4cnb")
 
 [node name="CameraPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4)
+
+[node name="Eyes" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.365473, 0, 0, 0, 0.222278, 0, 0, 0, 0.167722, 0, 1.30116, 0.348212)
+mesh = SubResource("BoxMesh_owsm4")
