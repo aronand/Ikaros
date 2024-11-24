@@ -33,6 +33,10 @@ func attach_camera_to_player() -> void:
 	player.add_child(camera)
 
 	# Move and rotate camera to proper position
+	var camera_root: Node3D = player.find_child("CameraRoot")
 	var camera_position: Node3D = player.find_child("CameraPosition")
+	# TODO: Rethink this setup. We could get rid of camera_position by exposing the camera settings
+	# in the editor instead.
 	camera.position = camera_position.position
+	camera.position.y = camera_root.position.y
 	camera.rotation_degrees.y = 180
