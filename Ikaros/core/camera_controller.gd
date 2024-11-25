@@ -3,6 +3,7 @@ extends Node
 
 
 @export var look_sensitivity: float = 0.5
+@export var joystick_sensitivity: float = 4.0
 
 var camera_root: Node3D
 var camera: Camera3D
@@ -38,6 +39,12 @@ func _create_camera_root() -> Node3D:
 
 
 func _process(delta: float) -> void:
+	var joystick_motion: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	if joystick_motion:
+		# TODO: Allow inverting controls via menu
+		_rotation_input = joystick_motion.x * joystick_sensitivity
+		_tilt_input = -joystick_motion.y * joystick_sensitivity
+
 	if _rotation_input or _tilt_input:
 		handle_camera_rotation(delta)
 
