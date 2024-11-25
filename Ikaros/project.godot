@@ -14,7 +14,7 @@ config/name="Ikaros"
 config/version="0.0.1"
 run/main_scene="res://game/levels/movement_gym.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://ikaros_logo.svg"
 
 [autoload]
 
