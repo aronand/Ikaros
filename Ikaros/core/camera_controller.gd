@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 	var joystick_motion: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if joystick_motion:
 		# TODO: Allow inverting controls via menu
-		_rotation_input = joystick_motion.x * joystick_sensitivity
+		_rotation_input = -joystick_motion.x * joystick_sensitivity
 		_tilt_input = -joystick_motion.y * joystick_sensitivity
 
 	if _rotation_input or _tilt_input:
