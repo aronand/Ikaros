@@ -37,7 +37,7 @@ func _create_camera_root() -> Node3D:
 	return camera_root
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if _rotation_input or _tilt_input:
 		handle_camera_rotation(delta)
 
