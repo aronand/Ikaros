@@ -31,7 +31,4 @@ func attach_camera_to_player() -> void:
 		_logger.warn("Couldn't attach camera to player: Player queued for free.")
 		return
 
-	camera_controller.camera.position.z = -4.0  # Move camera behind the player
-	camera_controller.camera.rotation_degrees.y = 180.0  # Rotate camera to face the player
-	camera_controller.camera_root.position.y = 1.5  # Move camera root to proper height so the camera isn't underground
 	player.add_child(camera_controller.camera_root)

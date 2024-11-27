@@ -2,40 +2,78 @@ class_name IkarosCameraController
 extends Node
 
 
-@export var look_sensitivity: float = 0.5
+@export_category("Look Sensitivity")
+@export var mouse_sensitivity: float = 0.5
 @export var joystick_sensitivity: float = 4.0
 
-var camera_root: Node3D
-var camera: Camera3D
+@export_category("Camera Config")
+## Controls camera distance from the camera root.
+## Negative values move the camera ahead of the root.
+@export var camera_distance: float = 4.0
+## Controls camera height.
+@export var camera_height: float = 1.5
+## Controls how high up the camera can rotate to.
+@export var tilt_upper_limit: float = 90.0
+## Controls how low down the camera can rotate to.
+@export var tilt_lower_limit: float = -90.0
 
-var tilt_lower_limit: float = -90.0
-var tilt_upper_limit: float = 90.0
+
+## Camera root node. Acts as the camera arm/holder. Defined when accessed if not yet defined.
+var camera_root: Node3D = null:
+	get:
+		if camera_root == null:
+			_create_camera_root()
+		return camera_root
+
+## Camera node. Defined when accessed if not yet defined.
+var camera: Camera3D = null:
+	get:
+		if camera_root == null:
+			_create_camera_root()  # Creating the camera root also creates the camera.
+		return camera
+
 
 var _rotation_input: float
 var _tilt_input: float
 var _mouse_rotation: Vector3
 var _camera_rotation: Vector3
 
+## Controls camera position. Camera position is automatically adjusted when this value changes.
+var _is_first_person: bool = false:
+	set(value):
+		if value == _is_first_person:
+			return
+
+		if value == false:
+			camera.position.z = -camera_distance
+		else:
+			camera.position.z = 0.0  # TODO: Experiment with a small positive value (mimics actual head movement)
+		_is_first_person = value
+
 
 func _ready() -> void:
 	assert(get_parent() is IkarosScene)
-	camera_root = _create_camera_root()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var mouse_motion: InputEventMouseMotion = event as InputEventMouseMotion
-		_rotation_input = -mouse_motion.relative.x * look_sensitivity
-		_tilt_input = -mouse_motion.relative.y * look_sensitivity
+		_rotation_input = -mouse_motion.relative.x * mouse_sensitivity
+		_tilt_input = -mouse_motion.relative.y * mouse_sensitivity
+	elif event is InputEventKey or event is InputEventJoypadButton:
+		if Input.is_action_just_pressed("toggle_camera_view"):
+			_is_first_person = not _is_first_person
 
 
 # TODO: This whole setup is a candidate for a new class (IkarosCamera)
-func _create_camera_root() -> Node3D:
+func _create_camera_root() -> void:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
-	return camera_root
+	camera.position.z = -camera_distance  # Move camera behind the player
+	camera.rotation_degrees.y = 180.0  # Rotate camera to face the player
+	camera_root.position.y = camera_height  # Move camera root to proper height so the camera isn't underground
 
 
 func _process(delta: float) -> void:
