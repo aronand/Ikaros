@@ -2,7 +2,7 @@ class_name IkarosCameraController
 extends Node
 
 
-@export var look_sensitivity: float = 0.5
+@export var mouse_sensitivity: float = 0.5
 @export var joystick_sensitivity: float = 4.0
 
 var camera_root: Node3D
@@ -26,8 +26,8 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var mouse_motion: InputEventMouseMotion = event as InputEventMouseMotion
-		_rotation_input = -mouse_motion.relative.x * look_sensitivity
-		_tilt_input = -mouse_motion.relative.y * look_sensitivity
+		_rotation_input = -mouse_motion.relative.x * mouse_sensitivity
+		_tilt_input = -mouse_motion.relative.y * mouse_sensitivity
 
 
 # TODO: This whole setup is a candidate for a new class (IkarosCamera)
