@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 		# Cursed af, but works for now.
 		var camera_root: Node3D = _player.find_child("CameraRoot")
 		var col_shape: CollisionShape3D = _player.find_child("CollisionShape3D")
-		col_shape.rotation.y = camera_root.rotation.y  # CRITICAL: Doesn't work
+		col_shape.rotation.y = camera_root.rotation.y
 
 		var relative_dir: Vector3 = direction.rotated(Vector3.UP, camera_root.rotation.y)
 		_move_params.direction = relative_dir
