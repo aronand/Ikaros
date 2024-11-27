@@ -35,6 +35,9 @@ func _create_camera_root() -> Node3D:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
+	camera.position.z = -4.0  # Move camera behind the player
+	camera.rotation_degrees.y = 180.0  # Rotate camera to face the player
+	camera_root.position.y = 1.5  # Move camera root to proper height so the camera isn't underground
 	return camera_root
 
 
