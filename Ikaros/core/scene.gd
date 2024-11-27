@@ -31,4 +31,5 @@ func attach_camera_to_player() -> void:
 		_logger.warn("Couldn't attach camera to player: Player queued for free.")
 		return
 
+	_logger.info("Attaching camera to player.")
 	player.add_child(camera_controller.camera_root)

@@ -33,6 +33,7 @@ var camera: Camera3D = null:
 		return camera
 
 
+var _logger: LogStream = Ikaros.get_logger("CameraController")
 var _rotation_input: float
 var _tilt_input: float
 var _mouse_rotation: Vector3
@@ -45,8 +46,10 @@ var _is_first_person: bool = false:
 			return
 
 		if value == false:
+			_logger.debug("Switching to third person view.")
 			camera.position.z = -camera_distance
 		else:
+			_logger.debug("Switching to first person view.")
 			camera.position.z = 0.0  # TODO: Experiment with a small positive value (mimics actual head movement)
 		_is_first_person = value
 
@@ -68,6 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # TODO: This whole setup is a candidate for a new class (IkarosCamera)
 func _create_camera_root() -> void:
+	_logger.info("Creating camera root and camera.")
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
