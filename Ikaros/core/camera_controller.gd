@@ -2,14 +2,24 @@ class_name IkarosCameraController
 extends Node
 
 
+@export_category("Look Sensitivity")
 @export var mouse_sensitivity: float = 0.5
 @export var joystick_sensitivity: float = 4.0
 
+@export_category("Camera Config")
+## Controls camera distance from the camera root.
+## Negative values move the camera ahead of the root.
+@export var camera_distance: float = 4.0
+## Controls camera height.
+@export var camera_height: float = 1.5
+## Controls how high up the camera can rotate to.
+@export var tilt_upper_limit: float = 90.0
+## Controls how low down the camera can rotate to.
+@export var tilt_lower_limit: float = -90.0
+
+
 var camera_root: Node3D
 var camera: Camera3D
-
-var tilt_lower_limit: float = -90.0
-var tilt_upper_limit: float = 90.0
 
 var _rotation_input: float
 var _tilt_input: float
@@ -35,9 +45,9 @@ func _create_camera_root() -> Node3D:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
-	camera.position.z = -4.0  # Move camera behind the player
+	camera.position.z = -camera_distance  # Move camera behind the player
 	camera.rotation_degrees.y = 180.0  # Rotate camera to face the player
-	camera_root.position.y = 1.5  # Move camera root to proper height so the camera isn't underground
+	camera_root.position.y = camera_height  # Move camera root to proper height so the camera isn't underground
 	return camera_root
 
 
