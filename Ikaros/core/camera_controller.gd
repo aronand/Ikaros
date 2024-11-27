@@ -77,6 +77,7 @@ func _create_camera_root() -> void:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
+	camera_root.name = "CameraRoot"
 	camera.position.z = -camera_distance  # Move camera to proper distance from root
 	camera.position.x = -camera_horizontal_position  # Move camera to proper horizontal position
 	camera.rotation_degrees.y = 180.0  # Rotate camera to face forward

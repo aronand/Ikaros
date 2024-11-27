@@ -23,9 +23,16 @@ func _process(delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector("move_right", "move_left", "move_backward", "move_forward")
 	var direction: Vector3 = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
 	if direction:
-		_move_params.direction = direction
+		# HACK: Rotate the player character's collision shape to match with camera node. This will rotate the mesh as well.
+		# Cursed af, but works for now.
+		var camera_root: Node3D = _player.find_child("CameraRoot")
+		var col_shape: CollisionShape3D = _player.find_child("CollisionShape3D")
+		col_shape.rotation.y = camera_root.rotation.y  # CRITICAL: Doesn't work
+
+		var relative_dir: Vector3 = direction.rotated(Vector3.UP, camera_root.rotation.y)
+		_move_params.direction = relative_dir
 		_move_command.execute(_player, _move_params)
-	
+
 	if Input.is_action_just_pressed("jump"):
 		_jump_command.execute(_player)
 
