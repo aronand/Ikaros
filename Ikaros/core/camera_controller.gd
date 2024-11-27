@@ -12,6 +12,8 @@ extends Node
 @export var camera_distance: float = 4.0
 ## Controls camera height.
 @export var camera_height: float = 1.5
+## Controls camera horizontal position.
+@export var camera_horizontal_position: float = 0.0
 ## Controls how high up the camera can rotate to.
 @export var tilt_upper_limit: float = 90.0
 ## Controls how low down the camera can rotate to.
@@ -75,8 +77,9 @@ func _create_camera_root() -> void:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
-	camera.position.z = -camera_distance  # Move camera behind the player
-	camera.rotation_degrees.y = 180.0  # Rotate camera to face the player
+	camera.position.z = -camera_distance  # Move camera to proper distance from root
+	camera.position.x = -camera_horizontal_position  # Move camera to proper horizontal position
+	camera.rotation_degrees.y = 180.0  # Rotate camera to face forward
 	camera_root.position.y = camera_height  # Move camera root to proper height so the camera isn't underground
 
 
