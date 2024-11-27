@@ -18,8 +18,20 @@ extends Node
 @export var tilt_lower_limit: float = -90.0
 
 
-var camera_root: Node3D
-var camera: Camera3D
+## Camera root node. Acts as the camera arm/holder. Defined when accessed if not yet defined.
+var camera_root: Node3D = null:
+	get:
+		if camera_root == null:
+			_create_camera_root()
+		return camera_root
+
+## Camera node. Defined when accessed if not yet defined.
+var camera: Camera3D = null:
+	get:
+		if camera_root == null:
+			_create_camera_root()  # Creating the camera root also creates the camera.
+		return camera
+
 
 var _rotation_input: float
 var _tilt_input: float
@@ -29,7 +41,6 @@ var _camera_rotation: Vector3
 
 func _ready() -> void:
 	assert(get_parent() is IkarosScene)
-	camera_root = _create_camera_root()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -41,14 +52,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # TODO: This whole setup is a candidate for a new class (IkarosCamera)
-func _create_camera_root() -> Node3D:
+func _create_camera_root() -> void:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
 	camera.position.z = -camera_distance  # Move camera behind the player
 	camera.rotation_degrees.y = 180.0  # Rotate camera to face the player
 	camera_root.position.y = camera_height  # Move camera root to proper height so the camera isn't underground
-	return camera_root
 
 
 func _process(delta: float) -> void:
