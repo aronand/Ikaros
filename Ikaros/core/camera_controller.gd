@@ -73,6 +73,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _create_camera_root() -> void:
 	_logger.info("Creating camera root and camera.")
 	camera_root = Node3D.new()
+	camera_root.name = "CameraRoot"
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
 	# Move camera to proper distance from root
