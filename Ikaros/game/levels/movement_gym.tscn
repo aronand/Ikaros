@@ -28,7 +28,7 @@ player = NodePath("Character")
 [node name="IkarosCameraController" type="Node" parent="."]
 script = ExtResource("2_q73t8")
 
-[node name="PlayerController" type="Node" parent="."]
+[node name="IkarosPlayerController" type="Node" parent="."]
 script = ExtResource("2_4v1bt")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
