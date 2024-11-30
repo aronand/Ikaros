@@ -22,6 +22,12 @@ jobs:
         run: |
           cd $PROJECT_PATH
           find . -type f -name "*.gd" -exec godot --headless --verbose --check-only --script {} \;
+      # TODO: Make this its own job
+      - name: Run tests
+        run: |
+          cd $PROJECT_PATH
+          godot --headless --quit -d -s --path . addons/gut/gut_cmdln.gd
+
 
 #   export-windows:
 #     name: Windows Export
