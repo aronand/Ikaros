@@ -19,7 +19,7 @@ func _exit_tree() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_gravity(delta)
-	
+
 	# Directional movement
 	# TODO: This should probably go within the move() method
 	if _direction:
@@ -41,7 +41,7 @@ func handle_gravity(delta: float) -> void:
 func jump() -> void:
 	if not is_on_floor():
 		return
-	
+
 	velocity.y = jump_velocity
 
 

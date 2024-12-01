@@ -16,16 +16,19 @@ func _init() -> void:
 	_move_params = IkarosCharacterMoveCommand.Params.new()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _player == null:
 		return
 
-	var input_dir: Vector2 = Input.get_vector("move_right", "move_left", "move_backward", "move_forward")
-	var direction: Vector3 = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
+	var input_dir: Vector2 = Input.get_vector(
+		"move_right", "move_left", "move_backward", "move_forward"
+	)
+	var direction: Vector3
+	direction = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
 	if direction:
 		_move_params.direction = direction
 		_move_command.execute(_player, _move_params)
-	
+
 	if Input.is_action_just_pressed("jump"):
 		_jump_command.execute(_player)
 

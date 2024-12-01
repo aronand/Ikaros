@@ -52,7 +52,8 @@ var _is_first_person: bool = false:
 			camera.position.z = -camera_distance
 		else:
 			_logger.debug("Switching to first person view.")
-			camera.position.z = 0.0  # TODO: Experiment with a small positive value (mimics actual head movement)
+			# TODO: Experiment with a small positive value (mimics actual head movement)
+			camera.position.z = 0.0
 		_is_first_person = value
 
 
@@ -77,10 +78,14 @@ func _create_camera_root() -> void:
 	camera_root = Node3D.new()
 	camera = Camera3D.new()
 	camera_root.add_child(camera)
-	camera.position.z = -camera_distance  # Move camera to proper distance from root
-	camera.position.x = -camera_horizontal_position  # Move camera to proper horizontal position
-	camera.rotation_degrees.y = 180.0  # Rotate camera to face forward
-	camera_root.position.y = camera_height  # Move camera root to proper height so the camera isn't underground
+	# Move camera to proper distance from root
+	camera.position.z = -camera_distance
+	# Move camera to proper horizontal position
+	camera.position.x = -camera_horizontal_position
+	# Rotate camera to face forward
+	camera.rotation_degrees.y = 180.0
+	# Move camera root to proper height so the camera isn't underground
+	camera_root.position.y = camera_height
 
 
 func _process(delta: float) -> void:
