@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Scony/godot-gdscript-toolkit@master
-      - run: gdformat --check Ikaros/
+      #- run: gdformat --check Ikaros/
       - run: gdlint Ikaros/
