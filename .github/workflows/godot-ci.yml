@@ -1,58 +1,12 @@
 name: "godot-ci"
 on: push
 
-
-env:
-  GODOT_VERSION: 4.3
-  EXPORT_NAME: Ikaros
-  PROJECT_PATH: Ikaros
-
 jobs:
-  check-scripts:
-    name: Check scripts
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.3
+  static-checks:
+    name: Static checks
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Check scripts
-        run: |
-          cd $PROJECT_PATH
-          find . -type f -name "*.gd" -exec godot --headless --verbose --check-only --script {} \;
-      # TODO: Make this its own job
-      - name: Run tests
-        run: |
-          cd $PROJECT_PATH
-          godot --headless --quit -d -s --path . addons/gut/gut_cmdln.gd
-
-
-#   export-windows:
-#     name: Windows Export
-#     runs-on: ubuntu-20.04
-#     container:
-#       image: barichello/godot-ci:4.3
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v4
-#         with:
-#           lfs: true
-#       - name: Setup
-#         run: |
-#           mkdir -v -p ~/.local/share/godot/export_templates/
-#           mkdir -v -p ~/.config/
-#           mv /root/.config/godot ~/.config/godot
-#           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-#       - name: Windows Build
-#         run: |
-#           mkdir -v -p build/windows
-#           EXPORT_DIR="$(readlink -f build)"
-#           cd $PROJECT_PATH
-#           godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
-#       - name: Upload Artifact
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: windows
-#           path: build/windows
+      - uses: actions/checkout@v4
+      - uses: Scony/godot-gdscript-toolkit@master
+      - run: gdformat --check Ikaros/
+      - run: gdlint Ikaros/
