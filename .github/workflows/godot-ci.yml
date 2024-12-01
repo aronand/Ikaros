@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: Scony/godot-gdscript-toolkit@master
       - run: gdformat --check Ikaros/core Ikaros/game
-        continue-on-error: true
+        if: always()
       - run: gdlint Ikaros/core Ikaros/game
-        continue-on-error: true
+        if: always()
