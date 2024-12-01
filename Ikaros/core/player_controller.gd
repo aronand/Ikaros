@@ -25,8 +25,8 @@ func _process(_delta: float) -> void:
 	var direction: Vector3
 	direction = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
 	if direction:
-		# HACK: Rotate the player character's collision shape to match with camera node. This will rotate the mesh as well.
-		# Cursed af, but works for now.
+		# HACK: Rotate the player character's collision shape to match with camera node.
+		# This will rotate the mesh as well. Cursed af, but works for now.
 		var camera_root: Node3D = _player.find_child("CameraRoot")
 		var col_shape: CollisionShape3D = _player.find_child("CollisionShape3D")
 		col_shape.rotation.y = camera_root.rotation.y
