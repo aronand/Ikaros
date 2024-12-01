@@ -1,7 +1,6 @@
 class_name IkarosAutoload
 extends Node
 
-
 var log_level: LogStream.LogLevel = LogStream.LogLevel.DEBUG
 
 

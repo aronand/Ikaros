@@ -1,7 +1,6 @@
 class_name IkarosScene
 extends Node
 
-
 @export var player: IkarosCharacter
 
 var camera_controller: IkarosCameraController

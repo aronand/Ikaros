@@ -1,7 +1,6 @@
 class_name IkarosPlayerController
 extends Node
 
-
 var _player: IkarosCharacter
 
 var _jump_command: IkarosCharacterJumpCommand

@@ -1,7 +1,6 @@
 class_name IkarosCameraController
 extends Node
 
-
 @export_category("Look Sensitivity")
 @export var mouse_sensitivity: float = 0.5
 @export var joystick_sensitivity: float = 4.0
@@ -19,7 +18,6 @@ extends Node
 ## Controls how low down the camera can rotate to.
 @export var tilt_lower_limit: float = -90.0
 
-
 ## Camera root node. Acts as the camera arm/holder. Defined when accessed if not yet defined.
 var camera_root: Node3D = null:
 	get:
@@ -33,7 +31,6 @@ var camera: Camera3D = null:
 		if camera_root == null:
 			_create_camera_root()  # Creating the camera root also creates the camera.
 		return camera
-
 
 var _logger: LogStream = Ikaros.get_logger("CameraController")
 var _rotation_input: float
@@ -89,7 +86,9 @@ func _create_camera_root() -> void:
 
 
 func _process(delta: float) -> void:
-	var joystick_motion: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	var joystick_motion: Vector2 = Input.get_vector(
+		"look_left", "look_right", "look_up", "look_down"
+	)
 	if joystick_motion:
 		# TODO: Allow inverting controls via menu
 		_rotation_input = -joystick_motion.x * joystick_sensitivity
@@ -103,9 +102,7 @@ func handle_camera_rotation(delta: float) -> void:
 	_mouse_rotation.y += _rotation_input * delta
 	_mouse_rotation.x += -_tilt_input * delta
 	_mouse_rotation.x = clamp(
-		_mouse_rotation.x,
-		deg_to_rad(tilt_lower_limit),
-		deg_to_rad(tilt_upper_limit)
+		_mouse_rotation.x, deg_to_rad(tilt_lower_limit), deg_to_rad(tilt_upper_limit)
 	)
 
 	# TODO: Instead of manipulating the camera directly, pass the necessary information to it

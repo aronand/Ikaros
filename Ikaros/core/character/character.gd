@@ -1,7 +1,6 @@
 class_name IkarosCharacter
 extends CharacterBody3D
 
-
 @export var speed: float = 2.5
 @export var jump_velocity: float = 4.5
 
