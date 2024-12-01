@@ -5,9 +5,10 @@ jobs:
   static-checks:
     name: Static checks
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: Scony/godot-gdscript-toolkit@master
       - run: gdformat --check Ikaros/core Ikaros/game
+        continue-on-error: true
       - run: gdlint Ikaros/core Ikaros/game
+        continue-on-error: true
