@@ -1,7 +1,7 @@
 extends IkarosCharacterState
 
 
-func enter(previous_state_path: String, data: Dictionary = {}) -> void:
+func enter(_previous_state_path: String, _data: Dictionary = {}) -> void:
 	character.velocity.x = 0.0
 	character.velocity.z = 0.0
 

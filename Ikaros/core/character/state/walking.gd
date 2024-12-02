@@ -3,11 +3,11 @@ extends IkarosCharacterState
 var _direction: Vector3
 
 
-func enter(previous_state_path: String, data: Dictionary = {}) -> void:
+func enter(_previous_state_path: String, data: Dictionary = {}) -> void:
 	_direction = data.get("direction", Vector3.ZERO)
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	character.velocity.x = _direction.x * character.speed
 	character.velocity.z = _direction.z * character.speed
 	character.move_and_slide()

@@ -1,11 +1,11 @@
 extends IkarosCharacterState
 
 
-func enter(previous_state_path: String, data: Dictionary = {}) -> void:
+func enter(_previous_state_path: String, _data: Dictionary = {}) -> void:
 	character.velocity.y = character.jump_velocity
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	character.move_and_slide()
 
 	if character.velocity.y >= 0:
