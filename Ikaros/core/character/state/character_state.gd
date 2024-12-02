@@ -1,10 +1,10 @@
 class_name IkarosCharacterState
 extends IkarosState
 
-const IDLE = "idle"
-const WALKING = "walking"
-const JUMPING = "jumping"
-const FALLING = "falling"
+const IDLE: String = "idle"
+const WALKING: String = "walking"
+const JUMPING: String = "jumping"
+const FALLING: String = "falling"
 
 var character: IkarosCharacter
 

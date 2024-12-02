@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
 	if not has_node(target_state_path):
-		printerr("Trying to transition to a state that doesn't exist.")
+		printerr("Trying to transition to a state that doesn't exist: %s" % target_state_path)
 		return
 
 	var previous_state_path: String = state.name
