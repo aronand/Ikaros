@@ -4,6 +4,8 @@ extends Node
 var _player: IkarosCharacter
 var _direction: Vector3
 
+var _camera_controller: IkarosCameraController
+
 var _camera_root: Node3D = null:
 	get:
 		if _player == null:
@@ -41,11 +43,18 @@ func _process(_delta: float) -> void:
 	)
 
 	_direction = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
-	if _direction:
-		# HACK: Rotate the player character's collision shape to match with camera node.
-		# This will rotate the mesh as well. Cursed af, but works for now.
+
+	# HACK: Rotate the player character's collision shape to match with camera node.
+	# This will rotate the mesh as well. Cursed af, but works for now.
+	# BUG: Player rotates to face camera when switching view. Should be the other way,
+	# so we should rotate the camera to match player character orientation.
+	if _camera_controller.is_first_person:
 		_col_shape.rotation.y = _camera_root.rotation.y
 
+	if not _camera_controller.is_first_person and _direction:
+		_col_shape.rotation.y = _camera_root.rotation.y
+
+	if _direction:
 		var relative_dir: Vector3 = _direction.rotated(Vector3.UP, _camera_root.rotation.y)
 		_move_params.direction = relative_dir
 		_move_command.execute(_player, _move_params)
@@ -57,4 +66,5 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	assert(get_parent() is IkarosScene)
 	var scene: IkarosScene = get_parent()
+	_camera_controller = scene.find_child("IkarosCameraController")
 	_player = scene.player

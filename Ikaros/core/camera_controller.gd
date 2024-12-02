@@ -32,16 +32,10 @@ var camera: Camera3D = null:
 			_create_camera_root()  # Creating the camera root also creates the camera.
 		return camera
 
-var _logger: LogStream = Ikaros.get_logger("CameraController")
-var _rotation_input: float
-var _tilt_input: float
-var _mouse_rotation: Vector3
-var _camera_rotation: Vector3
-
 ## Controls camera position. Camera position is automatically adjusted when this value changes.
-var _is_first_person: bool = false:
+var is_first_person: bool = false:
 	set(value):
-		if value == _is_first_person:
+		if value == is_first_person:
 			return
 
 		if value == false:
@@ -51,7 +45,14 @@ var _is_first_person: bool = false:
 			_logger.debug("Switching to first person view.")
 			# TODO: Experiment with a small positive value (mimics actual head movement)
 			camera.position.z = 0.0
-		_is_first_person = value
+		is_first_person = value
+
+var _logger: LogStream = Ikaros.get_logger("CameraController")
+var _rotation_input: float
+var _tilt_input: float
+var _mouse_rotation: Vector3
+var _camera_rotation: Vector3
+
 
 
 func _ready() -> void:
@@ -66,7 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_tilt_input = -mouse_motion.relative.y * mouse_sensitivity
 	elif event is InputEventKey or event is InputEventJoypadButton:
 		if Input.is_action_just_pressed("toggle_camera_view"):
-			_is_first_person = not _is_first_person
+			is_first_person = not is_first_person
 
 
 # TODO: This whole setup is a candidate for a new class (IkarosCamera)
