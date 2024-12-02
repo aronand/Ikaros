@@ -3,6 +3,7 @@ extends Node
 
 var _player: IkarosCharacter
 var _direction: Vector3
+
 var _camera_root: Node3D = null:
 	get:
 		if _player == null:
@@ -10,6 +11,14 @@ var _camera_root: Node3D = null:
 		elif _camera_root == null:
 			_camera_root = _player.find_child("CameraRoot")
 		return _camera_root
+
+var _col_shape: CollisionShape3D = null:
+	get:
+		if _player == null:
+			return null
+		elif _col_shape == null:
+			_col_shape = _player.find_child("CollisionShape3D")
+		return _col_shape
 
 var _jump_command: IkarosCharacterJumpCommand
 var _move_command: IkarosCharacterMoveCommand
@@ -35,8 +44,7 @@ func _process(_delta: float) -> void:
 	if _direction:
 		# HACK: Rotate the player character's collision shape to match with camera node.
 		# This will rotate the mesh as well. Cursed af, but works for now.
-		var col_shape: CollisionShape3D = _player.find_child("CollisionShape3D")
-		col_shape.rotation.y = _camera_root.rotation.y
+		_col_shape.rotation.y = _camera_root.rotation.y
 
 		var relative_dir: Vector3 = _direction.rotated(Vector3.UP, _camera_root.rotation.y)
 		_move_params.direction = relative_dir
