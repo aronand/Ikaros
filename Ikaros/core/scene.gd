@@ -32,3 +32,4 @@ func attach_camera_to_player() -> void:
 
 	_logger.info("Attaching camera to player.")
 	player.add_child(camera_controller.camera_root)
+	camera_controller.camera_root.set_owner(player)
