@@ -8,7 +8,7 @@ var _camera_root: Node3D = null:
 	get:
 		if _player == null:
 			return null
-		elif _camera_root == null:
+		if _camera_root == null:
 			_camera_root = _player.find_child("CameraRoot")
 		return _camera_root
 
@@ -16,7 +16,7 @@ var _col_shape: CollisionShape3D = null:
 	get:
 		if _player == null:
 			return null
-		elif _col_shape == null:
+		if _col_shape == null:
 			_col_shape = _player.find_child("CollisionShape3D")
 		return _col_shape
 
