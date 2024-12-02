@@ -64,9 +64,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		var mouse_motion: InputEventMouseMotion = event as InputEventMouseMotion
 		_rotation_input = -mouse_motion.relative.x * mouse_sensitivity
 		_tilt_input = -mouse_motion.relative.y * mouse_sensitivity
-	elif event is InputEventKey or event is InputEventJoypadButton:
-		if Input.is_action_just_pressed("toggle_camera_view"):
-			is_first_person = not is_first_person
 
 
 # TODO: This whole setup is a candidate for a new class (IkarosCamera)

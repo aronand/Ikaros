@@ -68,3 +68,12 @@ func _ready() -> void:
 	var scene: IkarosScene = get_parent()
 	_camera_controller = scene.find_child("IkarosCameraController")
 	_player = scene.player
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventJoypadButton:
+		if Input.is_action_just_pressed("toggle_camera_view"):
+			if not _camera_controller.is_first_person:
+				# TODO: Handle rotating camera to match with character rotation.
+				pass
+			_camera_controller.is_first_person = not _camera_controller.is_first_person

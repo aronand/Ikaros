@@ -4,8 +4,7 @@ extends CharacterBody3D
 @export var speed: float = 2.5
 @export var jump_velocity: float = 4.5
 
-var _direction: Vector3
-var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var _state_machine: IkarosStateMachine
 
 
 func _enter_tree() -> void:
@@ -16,33 +15,22 @@ func _exit_tree() -> void:
 	remove_from_group("characters")
 
 
-func _physics_process(delta: float) -> void:
-	handle_gravity(delta)
-
-	# Directional movement
-	# TODO: This should probably go within the move() method
-	if _direction:
-		velocity.x = _direction.x * speed
-		velocity.z = _direction.z * speed
-		_direction = Vector3.ZERO
-	else:
-		velocity.x = 0
-		velocity.z = 0
-
-	move_and_slide()
-
-
-func handle_gravity(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y -= _gravity * delta
+func _ready() -> void:
+	_state_machine = find_child("IkarosStateMachine")
 
 
 func jump() -> void:
 	if not is_on_floor():
 		return
 
-	velocity.y = jump_velocity
+	var state: IkarosCharacterState = _state_machine.state
+	state.finished.emit(IkarosCharacterState.JUMPING)
 
 
 func move(direction: Vector3) -> void:
-	_direction = direction
+	if not is_on_floor():
+		return
+
+	var state: IkarosCharacterState = _state_machine.state
+	var data: Dictionary = {"direction": direction}
+	state.finished.emit(IkarosCharacterState.WALKING, data)
