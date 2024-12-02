@@ -22,16 +22,9 @@ var _col_shape: CollisionShape3D = null:
 			_col_shape = _player.find_child("CollisionShape3D")
 		return _col_shape
 
-var _jump_command: IkarosCharacterJumpCommand
-var _move_command: IkarosCharacterMoveCommand
-var _move_params: IkarosCharacterMoveCommand.Params
-
 
 func _init() -> void:
 	_player = null
-	_jump_command = IkarosCharacterJumpCommand.new()
-	_move_command = IkarosCharacterMoveCommand.new()
-	_move_params = IkarosCharacterMoveCommand.Params.new()
 
 
 func _process(_delta: float) -> void:
@@ -56,11 +49,10 @@ func _process(_delta: float) -> void:
 
 	if _direction:
 		var relative_dir: Vector3 = _direction.rotated(Vector3.UP, _camera_root.rotation.y)
-		_move_params.direction = relative_dir
-		_move_command.execute(_player, _move_params)
+		_player.move(relative_dir)
 
 	if Input.is_action_just_pressed("jump"):
-		_jump_command.execute(_player)
+		_player.jump()
 
 
 func _ready() -> void:
