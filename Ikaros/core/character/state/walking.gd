@@ -6,7 +6,7 @@ func enter(_previous_state_path: String, _data: Dictionary = {}) -> void:
 
 
 func physics_update(_delta: float) -> void:
-	character.handle_move()
+	character.apply_direction_to_velocity()
 	character.move_and_slide()
 
 	if not character.is_on_floor():

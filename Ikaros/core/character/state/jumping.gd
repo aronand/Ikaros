@@ -8,7 +8,7 @@ func enter(_previous_state_path: String, _data: Dictionary = {}) -> void:
 
 func physics_update(_delta: float) -> void:
 	if Ikaros.player_can_move_in_air and character == Ikaros.player:
-		character.handle_move()
+		character.apply_direction_to_velocity()
 	character.move_and_slide()
 
 	if character.velocity.y >= 0:

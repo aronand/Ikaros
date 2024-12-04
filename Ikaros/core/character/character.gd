@@ -50,7 +50,9 @@ func move(move_direction: Vector3) -> void:
 	direction = move_direction
 
 
-func handle_move() -> void:
+## Applies direction to velocity. This method should only be called from
+## within the state machine.
+func apply_direction_to_velocity() -> void:
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	direction = Vector3.ZERO
