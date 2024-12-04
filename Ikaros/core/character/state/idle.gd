@@ -12,3 +12,5 @@ func physics_update(delta: float) -> void:
 
 	if not character.is_on_floor():
 		finished.emit(FALLING)
+	elif character.should_jump:
+		finished.emit(JUMPING)

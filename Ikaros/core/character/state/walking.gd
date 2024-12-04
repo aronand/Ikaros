@@ -17,3 +17,5 @@ func physics_update(_delta: float) -> void:
 		finished.emit(FALLING)
 	elif is_equal_approx(_direction.x, 0.0) and is_equal_approx(_direction.y, 0.0):
 		finished.emit(IDLE)
+	elif character.should_jump:
+		finished.emit(JUMPING)
