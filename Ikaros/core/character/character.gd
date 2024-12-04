@@ -33,6 +33,9 @@ func _ready() -> void:
 
 
 func jump() -> void:
+	if state.name in [IkarosCharacterState.FALLING, IkarosCharacterState.JUMPING]:
+		return
+
 	should_jump = true
 
 
