@@ -15,7 +15,7 @@ func physics_update(_delta: float) -> void:
 
 	if not character.is_on_floor():
 		finished.emit(FALLING)
-	elif is_equal_approx(_direction.x, 0.0) and is_equal_approx(_direction.y, 0.0):
+	elif is_equal_approx(character.velocity.x, 0.0) and is_equal_approx(character.velocity.z, 0.0):
 		finished.emit(IDLE)
 	elif character.should_jump:
 		finished.emit(JUMPING)
