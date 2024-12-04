@@ -48,3 +48,9 @@ func jump() -> void:
 
 func move(move_direction: Vector3) -> void:
 	direction = move_direction
+
+
+func handle_move() -> void:
+	velocity.x = direction.x * speed
+	velocity.z = direction.z * speed
+	direction = Vector3.ZERO
