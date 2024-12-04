@@ -8,6 +8,10 @@ extends CharacterBody3D
 ## when in a state that can transition to a jump.
 var should_jump: bool = false
 
+## Getter for character's current state
+var state: IkarosCharacterState:
+	get: return _state_machine.state
+
 var _state_machine: IkarosStateMachine
 
 
