@@ -14,3 +14,5 @@ func physics_update(delta: float) -> void:
 		finished.emit(FALLING)
 	elif character.should_jump:
 		finished.emit(JUMPING)
+	elif character.direction != Vector3.ZERO:
+		finished.emit(WALKING)

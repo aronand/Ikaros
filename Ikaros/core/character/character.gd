@@ -8,9 +8,14 @@ extends CharacterBody3D
 ## when in a state that can transition to a jump.
 var should_jump: bool = false
 
-## Getter for character's current state
+## Controls movement direction. State machine will move to moving state if this
+## is not equal to Vector3.ZERO
+var direction: Vector3 = Vector3.ZERO
+
+## Getter for character's current state.
 var state: IkarosCharacterState:
-	get: return _state_machine.state
+	get:
+		return _state_machine.state
 
 var _state_machine: IkarosStateMachine
 
@@ -31,10 +36,5 @@ func jump() -> void:
 	should_jump = true
 
 
-func move(direction: Vector3) -> void:
-	if not is_on_floor():
-		return
-
-	var state: IkarosCharacterState = _state_machine.state
-	var data: Dictionary = {"direction": direction}
-	state.finished.emit(IkarosCharacterState.WALKING, data)
+func move(move_direction: Vector3) -> void:
+	direction = move_direction
