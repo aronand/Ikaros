@@ -1,6 +1,13 @@
 class_name IkarosCharacter
 extends CharacterBody3D
 
+## States that signify that the character is currently in the air.
+## Useful when trying to block actions while in the air, for example.
+const IN_AIR_STATES: Array[String] = [
+	IkarosCharacterState.FALLING,
+	IkarosCharacterState.JUMPING,
+]
+
 @export var speed: float = 2.5
 @export var jump_velocity: float = 4.5
 
@@ -33,7 +40,7 @@ func _ready() -> void:
 
 
 func jump() -> void:
-	if state.name in [IkarosCharacterState.FALLING, IkarosCharacterState.JUMPING]:
+	if state.name in IN_AIR_STATES:
 		return
 
 	should_jump = true
