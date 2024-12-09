@@ -19,7 +19,6 @@ config/icon="res://ikaros_logo.svg"
 [autoload]
 
 Log="*res://addons/logger/logger.gd"
-Ikaros="*res://core/autoload.gd"
 
 [debug]
 
