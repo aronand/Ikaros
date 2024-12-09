@@ -3,7 +3,7 @@ on: push
 
 jobs:
   gdtoolkit:
-    name: gdformat & gdlint
+    name: "gdtoolkit: gdformat and gdlint"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,7 +13,7 @@ jobs:
       - run: gdlint Ikaros/core Ikaros/game
         if: always()
   godot-check-scripts:
-    name: Check scripts
+    name: "godot: check scripts"
     runs-on: ubuntu-latest
     container:
       image: aronand/godot-alpine:4.3
