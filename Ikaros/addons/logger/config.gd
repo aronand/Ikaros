@@ -70,7 +70,6 @@ static func get_bool(name, default = false, prefix: String = "") -> bool:
 			return true
 		_:
 			return false
-	return false
 
 
 static func get_custom_var(name, type, default = null):

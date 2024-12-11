@@ -2,7 +2,6 @@ class_name JsonData
 
 const REQUIRED_OBJECT_SUFFIX = "_r"
 const COMPACT_VAR_SUFFIX = "_c"
-
 const WHITELIST_VAR_NAME = "whitelist"
 
 
@@ -20,7 +19,7 @@ static func unmarshal(dict: Dictionary, obj: Object, compressMode: int = -1) -> 
 	if dict.size() == 0 or obj == null:
 		return false
 	for k in dict:
-		if !k in obj:
+		if k not in obj:
 			continue
 		var newVar = _get_var(obj[k], dict[k])
 		if newVar != null:
@@ -39,11 +38,12 @@ static func unmarshal_bytes_to_dict(data: PackedByteArray, compressMode: int = -
 
 
 static func unmarshal_bytes(data: PackedByteArray, obj: Object, compressMode: int = -1) -> bool:
+	# NOTE: This function will always return false
 	if data.size() == 0 or obj == null:
 		return false
 	var dict = unmarshal_bytes_to_dict(data, compressMode)
 	for k in dict:
-		if !k in obj:
+		if k not in obj:
 			continue
 		var newVar = _get_var(obj[k], dict[k])
 		if newVar != null:
@@ -74,7 +74,6 @@ static func required_items(property_list: Array) -> Array:
 			name = property
 		if _ends_with(name, [COMPACT_VAR_SUFFIX, REQUIRED_OBJECT_SUFFIX]):
 			output.append(property)
-			continue
 	return output
 
 
@@ -90,7 +89,7 @@ static func _get_dict_with_list(obj: Object, property_list: Array, compact: bool
 			continue
 		if compact and !_ends_with(name, [COMPACT_VAR_SUFFIX, REQUIRED_OBJECT_SUFFIX]):
 			continue
-		if !name in obj:
+		if name not in obj:
 			continue
 		var data_type = typeof(obj[name])
 		var value = obj[name]

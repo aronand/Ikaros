@@ -1,8 +1,8 @@
 @tool
 class_name LogStream
 extends Node
-##Class that handles all the logging in the addon, methods can either be accessed through
-##the "GodotLogger" singelton, or you can instance this class yourself(no need to add it to the tree)
+## Class that handles all the logging in the addon, methods can either be accessed through
+## the "GodotLogger" singelton, or you can instance this class yourself(no need to add it to the tree)
 
 
 const settings := preload("./settings.gd")
@@ -25,7 +25,7 @@ var _crash_behavior
 static var _log_file: FileAccess
 static var initialized = false
 
-##Emits this signal whenever a message is recieved.
+## Emits this signal whenever a message is recieved.
 signal log_message(level: LogLevel, message: String)
 
 
@@ -52,43 +52,43 @@ func _init(
 	_crash_behavior = crash_behavior
 
 
-##prints a message to the log at the debug level.
+## Prints a message to the log at the debug level.
 func debug(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values, LogLevel.DEBUG)
 
 
-##Shorthand for debug
+## Shorthand for debug
 func dbg(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values, LogLevel.DEBUG)
 
 
-##prints a message to the log at the info level.
+## Prints a message to the log at the info level.
 func info(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values)
 
 
-##prints a message to the log at the warning level.
+## Prints a message to the log at the warning level.
 func warn(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values, LogLevel.WARN)
 
 
-##Prints a message to the log at the error level.
+## Prints a message to the log at the error level.
 func error(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values, LogLevel.ERROR)
 
 
-##Shorthand for error
+## Shorthand for error
 func err(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values, LogLevel.ERROR)
 
 
-##Prints a message to the log at the fatal level, exits the application
-##since there has been a fatal error.
+## Prints a message to the log at the fatal level, exits the application
+## since there has been a fatal error.
 func fatal(message: String, values: Variant = null):
 	call_thread_safe("_internal_log", message, values, LogLevel.FATAL)
 
 
-##Throws an error if err_code is not of value "OK" and appends the error code string.
+## Throws an error if err_code is not of value "OK" and appends the error code string.
 func err_cond_not_ok(
 	err_code: Error, message: String, fatal := true, other_values_to_be_printed = {}
 ):
@@ -105,7 +105,7 @@ func err_cond_not_ok(
 		)
 
 
-##Throws an error if the "statement" passed is false. Handy for making code "free" from if statements.
+## Throws an error if the "statement" passed is false. Handy for making code "free" from if statements.
 func err_cond_false(
 	statement: bool, message: String, fatal := true, other_values_to_be_printed = {}
 ):
@@ -118,7 +118,7 @@ func err_cond_false(
 		)
 
 
-##Throws an error if argument == null
+## Throws an error if argument == null
 func err_cond_null(arg, message: String, fatal := true, other_values_to_be_printed = {}):
 	if arg == null:
 		call_thread_safe(
@@ -129,7 +129,7 @@ func err_cond_null(arg, message: String, fatal := true, other_values_to_be_print
 		)
 
 
-##Throws an error if the arg1 isn't equal to arg2. Handy for making code "free" from if statements.
+## Throws an error if the arg1 isn't equal to arg2. Handy for making code "free" from if statements.
 func err_cond_not_equal(
 	arg1, arg2, message: String, fatal := true, other_values_to_be_printed = {}
 ):
@@ -143,28 +143,28 @@ func err_cond_not_equal(
 		)
 
 
-##Main internal logging method, please use the methods above instead, since this is not thread safe.
+## Main internal logging method, please use the methods above instead, since this is not thread safe.
 func _internal_log(message: String, values, log_level := LogLevel.INFO):
 	if current_log_level > log_level:
 		return
 	if log_level == LogLevel.DEFAULT:
 		err("Can't log at 'default' level, this level is only used as filter")
-	##Format message string
+	# Format message string
 	var format_str: String = ProjectSettings.get_setting(
 		settings.LOG_MESSAGE_FORMAT_KEY, settings.LOG_MESSAGE_FORMAT_DEFAULT_VALUE
 	)
 	message = format_str.format(_get_format_data(message, log_level))
-	##Tac on passed values
+	# Tac on passed values
 	message += _stringify_values(values)
 
 	var stack = get_stack()
 	emit_signal("log_message", log_level, message)
-	if stack.is_empty():  #Aka is connected to debug server -> print to the editor console in addition to pushing the warning.
+	if stack.is_empty():  # Aka is connected to debug server -> print to the editor console in addition to pushing the warning.
 		_log_mode_console(message, log_level)
 	else:
 		_log_mode_editor(message, log_level, stack)
 	# TODO: Figure out how to do the below without needing to have the Log autoload
-	# ##AKA, level is error or fatal, the main tree is accessible and we want to print it.
+	# # AKA, level is error or fatal, the main tree is accessible and we want to print it.
 	# if log_level > 3 && Log.is_inside_tree() && ProjectSettings.get_setting(settings.PRINT_TREE_ON_ERROR_KEY, settings.PRINT_TREE_ON_ERROR_DEFAULT_VALUE):
 	# 	#We want to access the main scene tree since this may be a custom logger that isn't in the main tree.
 	# 	print("Main tree: ")
@@ -185,21 +185,21 @@ func _log_mode_editor(msg: String, lvl: LogLevel, stack: Array):
 			print_rich("[color=yellow]" + msg + "[/color]")
 			push_warning(msg)
 			print(_get_reduced_stack(stack) + "\n")
-		_:  #AKA error or fatal
+		_:  # AKA error or fatal
 			push_error(msg)
 			msg = msg.replace("[lb]", "[").replace("[rb]", "]")
 			printerr(msg)
-			#Mimic the native godot behavior of halting execution upon error.
+			# Mimic the native godot behavior of halting execution upon error.
 			if ProjectSettings.get_setting(
 				settings.BREAK_ON_ERROR_KEY, settings.BREAK_ON_ERROR_DEFAULT_VALUE
 			):
-				##Please go a few steps down the stack to find the errorous code, since you are currently inside the error handler.
+				# Please go a few steps down the stack to find the errorous code, since you are currently inside the error handler.
 				breakpoint
 			print(_get_reduced_stack(stack))
 
 
 func _log_mode_console(msg: String, lvl: LogLevel):
-	##remove any BBCodes
+	# remove any BBCodes
 	msg = msg.replace("[lb]", "[").replace("[rb]", "]")
 	if lvl < 3:
 		print(msg)
@@ -271,19 +271,19 @@ func _get_reduced_stack(stack: Array) -> String:
 				+ "\n"
 			)
 	else:
-		##TODO: test print_debug()
+		# TODO: test print_debug()
 		stack_trace_message = "No stack trace available, please run from within the editor or connect to a remote debug context."
 	return stack_trace_message
 
 
-##Internal method.
+## Internal method.
 func _set_level(level: LogLevel):
 	level = _get_external_log_level() if level == LogLevel.DEFAULT else level
 	info("setting log level to " + LogLevel.keys()[level])
 	current_log_level = level
 
 
-##Internal method.
+## Internal method.
 func _get_external_log_level() -> LogLevel:
 	var key = Config.get_var("log-level", "info").to_upper()
 	if LogLevel.keys().has(key):
@@ -302,16 +302,16 @@ static func _ensure_setting_exists(setting: String, default_value) -> void:
 			ProjectSettings.call("set_as_basic", setting, true)
 
 
-##Controls the behavior when a fatal error has been logged.
-##Edit to customize the behavior.
+## Controls the behavior when a fatal error has been logged.
+## Edit to customize the behavior.
 static func default_crash_behavior():
-	#Restart the process to the main scene. (Uncomment if wanted),
-	#note that we don't want to restart if we crash on init, then we get stuck in an infinite crash-loop, which isn't fun for anyone.
+	# Restart the process to the main scene. (Uncomment if wanted),
+	# note that we don't want to restart if we crash on init, then we get stuck in an infinite crash-loop, which isn't fun for anyone.
 	#if get_tree().get_frame()>0:
 	#	var _ret = OS.create_process(OS.get_executable_path(), OS.get_cmdline_args())
 
-	#Choose crash mechanism. Difference is that get_tree().quit() quits at the end of the frame,
-	#enabling multiple fatal errors to be cast, printing multiple stack traces etc.
-	#Warning regarding the use of OS.crash() in the docs can safely be regarded in this case.
+	# Choose crash mechanism. Difference is that get_tree().quit() quits at the end of the frame,
+	# enabling multiple fatal errors to be cast, printing multiple stack traces etc.
+	# Warning regarding the use of OS.crash() in the docs can safely be regarded in this case.
 	OS.crash("Crash since falal error ocurred")
 	#get_tree().quit(-1)
