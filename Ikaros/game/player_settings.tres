@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="IkarosPlayerSettings" load_steps=2 format=3 uid="uid://ck2y0fk5ywyr4"]
+
+[ext_resource type="Script" path="res://core/player/player_settings.gd" id="1_clhqx"]
+
+[resource]
+script = ExtResource("1_clhqx")
