@@ -33,5 +33,5 @@ Prior to this there were two autoloads:
 
 - [Godot Jolt](https://github.com/godot-jolt/godot-jolt)
 - [Godot Unit Test](https://github.com/bitwes/Gut)
-- [Log](https://github.com/albinaask/Log)
+- [Log](https://github.com/albinaask/Log) (Note that this addon has been modified to remove its dependence on having an autoload)
 - [GDScript Toolkit](https://github.com/Scony/godot-gdscript-toolkit)
