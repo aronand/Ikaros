@@ -27,7 +27,7 @@ Prior to this there were two autoloads:
 - Ikaros - a singleton acting as a pseudo-namespace for the project
   - Turned into a static class (i.e. all members and methods are now static)
 - Log - an autoload injected by the Log addon
-  - Section of code in `logger/log-stream.gd` requiring the autoload has been disabled for the time being
+  - Section of code in `logger/log-stream.gd` requiring the `Log` autoload has been modified to work without it
 
 ## Acknowledgments
 
