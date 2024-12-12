@@ -13,7 +13,16 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	camera_controller = find_children("", "IkarosCameraController")[0]  # CRITICAL: Major assumption
+	var camera_controller_nodes: Array[Node] = find_children("", "IkarosCameraController")
+
+	if len(camera_controller_nodes) == 0:
+		_logger.error("Scene has no IkarosCameraController node.")
+		Ikaros.quit()
+		return
+	# NOTE: This else block seemingly needs to be here, otherwise we won't have
+	# the error output when the game exits.
+	else:
+		camera_controller = camera_controller_nodes[0] as IkarosCameraController
 
 	if player == null:
 		_logger.warn("Player not defined in scene")
