@@ -163,13 +163,12 @@ func _internal_log(message: String, values, log_level := LogLevel.INFO):
 		_log_mode_console(message, log_level)
 	else:
 		_log_mode_editor(message, log_level, stack)
-	# TODO: Figure out how to do the below without needing to have the Log autoload
-	# # AKA, level is error or fatal, the main tree is accessible and we want to print it.
-	# if log_level > 3 && Log.is_inside_tree() && ProjectSettings.get_setting(settings.PRINT_TREE_ON_ERROR_KEY, settings.PRINT_TREE_ON_ERROR_DEFAULT_VALUE):
-	# 	#We want to access the main scene tree since this may be a custom logger that isn't in the main tree.
-	# 	print("Main tree: ")
-	# 	Log.get_tree().root.print_tree_pretty()
-	# 	print("")#Print empty line to mark new message
+	# AKA, level is error or fatal, the main tree is accessible and we want to print it.
+	if log_level > 3 and ProjectSettings.get_setting(settings.PRINT_TREE_ON_ERROR_KEY, settings.PRINT_TREE_ON_ERROR_DEFAULT_VALUE):
+		# We want to access the main scene tree since this may be a custom logger that isn't in the main tree.
+		print("Main tree: ")
+		Engine.get_main_loop().root.print_tree_pretty()
+		print("") # Print empty line to mark new message
 
 	if log_level == LogLevel.FATAL:
 		_crash_behavior.call()
