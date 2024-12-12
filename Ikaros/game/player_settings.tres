@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_clhqx")
 can_move_in_air = true
+face_movement_direction = true
