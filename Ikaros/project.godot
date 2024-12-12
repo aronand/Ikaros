@@ -10,6 +10,7 @@ config_version=5
 
 [addons]
 
+Log/log_message_format="[lb]{hour}:{minute}:{second}[rb][lb]{level}[rb][lb]{log_name}[rb] {message}"
 Log/break_on_error=false
 
 [application]
