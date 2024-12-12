@@ -19,10 +19,10 @@ func _ready() -> void:
 		_logger.error("Scene has no IkarosCameraController node.")
 		Ikaros.quit()
 		return
-	# NOTE: This else block seemingly needs to be here, otherwise we won't have
-	# the error output when the game exits.
 	# gdlint: ignore=no-else-return
 	else:
+		# NOTE: This else block seemingly needs to be here, otherwise we won't have
+		# the error output when the game exits.
 		camera_controller = camera_controller_nodes[0] as IkarosCameraController
 
 	if player == null:
