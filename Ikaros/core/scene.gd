@@ -21,6 +21,7 @@ func _ready() -> void:
 		return
 	# NOTE: This else block seemingly needs to be here, otherwise we won't have
 	# the error output when the game exits.
+	# gdlint: ignore=no-else-return
 	else:
 		camera_controller = camera_controller_nodes[0] as IkarosCameraController
 
