@@ -18,7 +18,7 @@ func _ready() -> void:
 	if player == null:
 		_logger.warn("Player not defined in scene")
 	else:
-		Ikaros.player_settings.player = player
+		Ikaros.player = player
 		attach_camera_to_player()
 
 

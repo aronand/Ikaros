@@ -4,3 +4,4 @@
 
 [resource]
 script = ExtResource("1_clhqx")
+can_move_in_air = true
