@@ -2,17 +2,6 @@ class_name IkarosPlayerController
 extends Node
 
 var _player: IkarosCharacter
-var _direction: Vector3
-
-var _camera_controller: IkarosCameraController
-
-var _camera_root: Node3D = null:
-	get:
-		if _player == null:
-			return null
-		if _camera_root == null:
-			_camera_root = _player.find_child("CameraRoot")
-		return _camera_root
 
 var _col_shape: CollisionShape3D = null:
 	get:
@@ -21,6 +10,22 @@ var _col_shape: CollisionShape3D = null:
 		if _col_shape == null:
 			_col_shape = _player.find_child("CollisionShape3D")
 		return _col_shape
+
+var _camera_controller: IkarosCameraController
+var _camera_root: Node3D = null:
+	get:
+		if _player == null:
+			return null
+		if _camera_root == null:
+			_camera_root = _player.find_child("CameraRoot")
+		return _camera_root
+
+var _direction: Vector3
+var _relative_direction: Vector3:
+	get:
+		if _direction != Vector3.ZERO:
+			return _direction.rotated(Vector3.UP, _camera_root.rotation.y)
+		return Vector3.ZERO
 
 
 func _init() -> void:
@@ -47,14 +52,13 @@ func _process(_delta: float) -> void:
 	if not _camera_controller.is_first_person and _direction:
 		if Ikaros.player_settings.face_movement_direction:
 			# TODO: Janky, make it better
-			_col_shape.look_at(_col_shape.global_transform.origin - Ikaros.player.velocity)
+			_col_shape.look_at(_col_shape.global_transform.origin - _relative_direction)
 			_col_shape.rotation.x = 0.0
 		else:
 			_col_shape.rotation.y = _camera_root.rotation.y
 
 	if _direction:
-		var relative_dir: Vector3 = _direction.rotated(Vector3.UP, _camera_root.rotation.y)
-		_player.move(relative_dir)
+		_player.move(_relative_direction)
 
 	if Input.is_action_just_pressed("jump"):
 		_player.jump()
