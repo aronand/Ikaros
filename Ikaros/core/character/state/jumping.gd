@@ -12,10 +12,10 @@ func enter(_previous_state_path: String, _data: Dictionary = {}) -> void:
 func physics_update(delta: float) -> void:
 	if Ikaros.player_settings.can_move_in_air and character == Ikaros.player:
 		character.apply_direction_to_velocity(delta)
-	character.move_and_slide()
+	var collided: bool = character.move_and_slide()
 
-	# BUG: The jump will not end until the jump_max_height is reached.
-	# This means that the jumping state will not exit if the player, for example,
-	# bumps into an obstacle that is overhead.
-	if character.position.y - _start_y >= character.jump_max_height:
+	# BUG: This will trigger for _any_ collision, not just collisions overhead
+	if collided:
+		finished.emit(FALLING)
+	elif character.position.y - _start_y >= character.jump_max_height:
 		finished.emit(FALLING)
