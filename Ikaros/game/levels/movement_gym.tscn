@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bupmrodlohajo"]
+[gd_scene load_steps=12 format=3 uid="uid://bupmrodlohajo"]
 
 [ext_resource type="Script" path="res://core/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
@@ -21,6 +21,10 @@ ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ejrd6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ms3b6"]
 
 [node name="MovementGym" type="Node" node_paths=PackedStringArray("player")]
 script = ExtResource("1_dq8hd")
@@ -116,7 +120,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
 
 [node name="Character" parent="." instance=ExtResource("3_k15d2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.43268, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.259023, -2)
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 10.0
@@ -140,3 +144,23 @@ grow_vertical = 2
 text = "State: lorem ipsum"
 vertical_alignment = 1
 script = ExtResource("6_umpi3")
+
+[node name="Box01" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99465, 2.65999, -1.99644)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box01"]
+shape = SubResource("BoxShape3D_ejrd6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box01/CollisionShape3D"]
+mesh = SubResource("BoxMesh_ms3b6")
+skeleton = NodePath("../..")
+
+[node name="Box02" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.885, 0.757, -2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box02"]
+shape = SubResource("BoxShape3D_ejrd6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box02/CollisionShape3D"]
+mesh = SubResource("BoxMesh_ms3b6")
+skeleton = NodePath("../..")
