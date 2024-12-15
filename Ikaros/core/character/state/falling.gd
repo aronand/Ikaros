@@ -12,7 +12,6 @@ func physics_update(delta: float) -> void:
 	character.move_and_slide()
 
 	if character.is_on_floor():
-		character.jump_count = 0
 		if character.direction == Vector3.ZERO:
 			finished.emit(IDLE)
 		else:

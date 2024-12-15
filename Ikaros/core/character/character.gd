@@ -22,7 +22,13 @@ const IN_AIR_STATES: Array[String] = [
 var should_jump: bool = false
 
 ## Tracks how many times the player has jumped before touching the ground again.
-var jump_count: int = 0
+## Sets itself back to 0 when accessed while on the ground.
+var jump_count: int = 0:
+	get:
+		if is_on_floor():
+			jump_count = 0
+			return jump_count
+		return jump_count
 
 ## Controls movement direction. State machine will move to moving state if this
 ## is not equal to Vector3.ZERO
