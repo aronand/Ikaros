@@ -12,6 +12,10 @@ func physics_update(delta: float) -> void:
 	character.move_and_slide()
 
 	if character.is_on_floor():
+		# jump_count sets itself to 0 automatically when accessed and character
+		# is on the ground. However, this is not enough when we want to allow
+		# jumping while falling/dropping (e.g. player has walked off a ledge).
+		character.jump_count = 0
 		if character.direction == Vector3.ZERO:
 			finished.emit(IDLE)
 		else:
