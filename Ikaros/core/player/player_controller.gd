@@ -60,7 +60,7 @@ func _process(_delta: float) -> void:
 	if _direction:
 		_player.move(_relative_direction)
 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and player_can_jump():
 		_player.jump()
 
 
@@ -78,3 +78,19 @@ func _unhandled_input(event: InputEvent) -> void:
 				# TODO: Handle rotating camera to match with character rotation.
 				pass
 			_camera_controller.is_first_person = not _camera_controller.is_first_person
+
+
+func player_can_jump() -> bool:
+	if _player.jump_count >= Ikaros.player_settings.max_jumps:
+		return false
+
+	if _player.state.name == IkarosCharacterState.FALLING:
+		# Blocks the jump impulse if we've entered the falling state without jumping
+		if not Ikaros.player_settings.can_jump_when_falling and _player.jump_count == 0:
+			return false
+
+	if _player.state.name in IkarosCharacter.IN_AIR_STATES:
+		if not Ikaros.player_settings.can_multi_jump:
+			return false
+
+	return true

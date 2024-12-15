@@ -49,18 +49,9 @@ func _ready() -> void:
 
 
 func jump() -> void:
-	# NOTE: This check allows _all_ characters to double jump
-	if state.name in IN_AIR_STATES and not Ikaros.player_settings.can_multi_jump:
+	# NOTE: Player specific check can be found from IkarosPlayerController
+	if state.name in IN_AIR_STATES and not self == Ikaros.player:
 		return
-
-	if jump_count >= Ikaros.player_settings.max_jumps:
-		return
-
-	if state.name == IkarosCharacterState.FALLING:
-		# Blocks the jump impulse if we've entered the falling state without jumping
-		if not Ikaros.player_settings.can_jump_when_falling and jump_count == 0:
-			return
-
 	should_jump = true
 
 
