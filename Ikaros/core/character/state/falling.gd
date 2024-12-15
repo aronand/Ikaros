@@ -22,6 +22,11 @@ func physics_update(delta: float) -> void:
 	if character != Ikaros.player:
 		return
 
+	# Blocks further actions if player has entered the falling state without
+	# jumping into it (e.g. player has walked off a ledge).
+	if not Ikaros.player_settings.can_jump_when_falling and character.jump_count == 0:
+		return
+
 	# Double jumping
 	if character.should_jump and Ikaros.player_settings.can_multi_jump:
 		if character.jump_count < Ikaros.player_settings.max_jumps:
