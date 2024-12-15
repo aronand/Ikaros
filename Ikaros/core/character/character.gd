@@ -27,7 +27,6 @@ var jump_count: int = 0:
 	get:
 		if is_on_floor():
 			jump_count = 0
-			return jump_count
 		return jump_count
 
 ## Controls movement direction. State machine will move to moving state if this
