@@ -7,6 +7,7 @@ func enter(_previous_state_path: String, _data: Dictionary = {}) -> void:
 	_start_y = character.position.y
 	character.velocity.y = character.jump_velocity
 	character.should_jump = false
+	character.jump_count += 1
 
 
 func physics_update(delta: float) -> void:

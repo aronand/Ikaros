@@ -21,6 +21,9 @@ const IN_AIR_STATES: Array[String] = [
 ## when in a state that can transition to a jump.
 var should_jump: bool = false
 
+## Tracks how many times the player has jumped before touching the ground again.
+var jump_count: int = 0
+
 ## Controls movement direction. State machine will move to moving state if this
 ## is not equal to Vector3.ZERO
 var direction: Vector3 = Vector3.ZERO
@@ -46,7 +49,11 @@ func _ready() -> void:
 
 
 func jump() -> void:
-	if state.name in IN_AIR_STATES:
+	# NOTE: This check allows _all_ characters to double jump
+	if state.name in IN_AIR_STATES and not Ikaros.player_settings.can_multi_jump:
+		return
+
+	if jump_count >= Ikaros.player_settings.max_jumps:
 		return
 
 	should_jump = true
