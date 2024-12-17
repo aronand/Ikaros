@@ -60,9 +60,6 @@ func _process(_delta: float) -> void:
 	if _direction:
 		_player.move(_relative_direction)
 
-	if Input.is_action_just_pressed("jump") and player_can_jump():
-		_player.jump()
-
 
 func _ready() -> void:
 	assert(get_parent() is IkarosScene)
@@ -72,12 +69,19 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey or event is InputEventJoypadButton:
-		if Input.is_action_just_pressed("toggle_camera_view"):
-			if not _camera_controller.is_first_person:
-				# TODO: Handle rotating camera to match with character rotation.
-				pass
-			_camera_controller.is_first_person = not _camera_controller.is_first_person
+	if event is not InputEventKey and event is not InputEventJoypadButton:
+		return
+
+	if Input.is_action_just_pressed("toggle_camera_view"):
+		if not _camera_controller.is_first_person:
+			# TODO: Handle rotating camera to match with character rotation.
+			pass
+		_camera_controller.is_first_person = not _camera_controller.is_first_person
+		return
+
+	if Input.is_action_just_pressed("jump") and player_can_jump():
+		_player.jump()
+		return
 
 
 func player_can_jump() -> bool:
