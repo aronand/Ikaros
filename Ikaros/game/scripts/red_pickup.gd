@@ -23,12 +23,15 @@ func _process(_delta: float) -> void:
 	_col_shape.rotation.x = 0.0
 
 
+<<<<<<< HEAD
 func _physics_process(_delta: float) -> void:
 	if not is_magnetic:
 		return
 	# TODO: Implement magnetic pickup behaviour
 
 
+=======
+>>>>>>> cb4730fe359c50b2d9120bcc6769647d89d3fa6c
 func _on_body_entered(body: Node3D) -> void:
 	if body is not IkarosCharacter:
 		return
@@ -37,5 +40,9 @@ func _on_body_entered(body: Node3D) -> void:
 		return
 
 	Ikaros.score += 1
+<<<<<<< HEAD
 	if not is_persistent:
 		queue_free()
+=======
+	queue_free()
+>>>>>>> cb4730fe359c50b2d9120bcc6769647d89d3fa6c
