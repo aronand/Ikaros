@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bupmrodlohajo"]
+[gd_scene load_steps=16 format=3 uid="uid://bupmrodlohajo"]
 
 [ext_resource type="Script" path="res://core/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://game/scripts/fps_label.gd" id="6_hctuc"]
 [ext_resource type="Script" path="res://game/scripts/state_label.gd" id="6_umpi3"]
 [ext_resource type="Script" path="res://game/scripts/frametime_label.gd" id="7_jjrh0"]
+[ext_resource type="PackedScene" uid="uid://dcwvx0n5k4f7b" path="res://game/assets/red_pickup.tscn" id="9_5850r"]
+[ext_resource type="Script" path="res://game/scripts/score_label.gd" id="9_scdib"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a575k"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -170,3 +172,10 @@ script = ExtResource("7_jjrh0")
 layout_mode = 2
 text = "State: lorem ipsum"
 script = ExtResource("6_umpi3")
+
+[node name="ScoreLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("9_scdib")
+
+[node name="RedPickup" parent="." instance=ExtResource("9_5850r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8764, 0.25, -13.614)
