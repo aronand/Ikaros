@@ -11,6 +11,9 @@ extends Area3D
 ## the pickup's collision shape.
 @export var requires_input: bool = false  # TODO: Implement
 
+## Pickup rotates to always face the player if true.
+@export var faces_player: bool = false
+
 @onready var _col_shape: CollisionShape3D = find_child("CollisionShape3D") as CollisionShape3D
 
 
@@ -19,8 +22,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	_col_shape.look_at(Ikaros.player.position)
-	_col_shape.rotation.x = 0.0
+	if faces_player:
+		_col_shape.look_at(Ikaros.player.position)
+		_col_shape.rotation.x = 0.0
 
 
 func _physics_process(_delta: float) -> void:
