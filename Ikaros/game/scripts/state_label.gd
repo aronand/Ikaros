@@ -1,6 +1,5 @@
 extends Label
 
-
 var state_machine: IkarosStateMachine
 var state: IkarosCharacterState
 

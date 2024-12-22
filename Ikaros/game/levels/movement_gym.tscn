@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://game/scripts/fps_label.gd" id="6_hctuc"]
 [ext_resource type="Script" path="res://game/scripts/state_label.gd" id="6_umpi3"]
 [ext_resource type="Script" path="res://game/scripts/frametime_label.gd" id="7_jjrh0"]
-[ext_resource type="PackedScene" path="res://game/assets/red_pickup.tscn" id="9_5850r"]
+[ext_resource type="PackedScene" uid="uid://k082b3voi8di" path="res://game/assets/red_pickup.tscn" id="9_5850r"]
 [ext_resource type="Script" path="res://game/scripts/score_label.gd" id="9_scdib"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a575k"]
