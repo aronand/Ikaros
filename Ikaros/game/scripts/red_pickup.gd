@@ -4,7 +4,13 @@ extends Area3D
 @export var is_persistent: bool = false
 
 ## A magnetic pickup will float towards the player when close enough.
-@export var is_magnetic: bool = false  # TODO: Implement
+@export var is_magnetic: bool = false
+
+## The distance at which the pickup begins floating towards the player.
+@export var magnetism_distance: float = 2.5
+
+## The speed at which the pickup approaches the player if the pickup is magnetic.
+@export var move_speed: float = 2.0
 
 ## A pickup that requires input behaves like an interactable object,
 ## with the difference that it requires the player to have also entered
@@ -27,10 +33,16 @@ func _process(_delta: float) -> void:
 		_col_shape.rotation.x = 0.0
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not is_magnetic:
 		return
-	# TODO: Implement magnetic pickup behaviour
+
+	var distance: Vector3 = global_transform.origin - Ikaros.player.global_transform.origin
+	if distance.length() > magnetism_distance:
+		return
+
+	var direction: Vector3 = distance.normalized()
+	position -= direction * delta * move_speed
 
 
 func _on_body_entered(body: Node3D) -> void:

@@ -181,3 +181,5 @@ script = ExtResource("9_scdib")
 
 [node name="RedPickup" parent="." instance=ExtResource("9_5850r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8764, 0.25, -13.614)
+is_magnetic = true
+faces_player = true
