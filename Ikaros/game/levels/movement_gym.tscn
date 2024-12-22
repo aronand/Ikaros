@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bupmrodlohajo"]
+[gd_scene load_steps=17 format=3 uid="uid://bupmrodlohajo"]
 
 [ext_resource type="Script" path="res://core/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
 [ext_resource type="Script" path="res://core/player/player_controller.gd" id="2_4v1bt"]
 [ext_resource type="Script" path="res://core/camera_controller.gd" id="2_q73t8"]
 [ext_resource type="PackedScene" uid="uid://byueo6oe0tjn7" path="res://game/assets/character.tscn" id="3_k15d2"]
+[ext_resource type="Script" path="res://game/scripts/debug_ui.gd" id="6_2e0fi"]
 [ext_resource type="Script" path="res://game/scripts/fps_label.gd" id="6_hctuc"]
 [ext_resource type="Script" path="res://game/scripts/state_label.gd" id="6_umpi3"]
 [ext_resource type="Script" path="res://game/scripts/frametime_label.gd" id="7_jjrh0"]
@@ -151,6 +152,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("6_2e0fi")
 
 [node name="Panel" type="PanelContainer" parent="DebugUI"]
 layout_mode = 0
