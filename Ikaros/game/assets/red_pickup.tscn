@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://k082b3voi8di"]
+
+[ext_resource type="Script" path="res://game/scripts/red_pickup.gd" id="1_f6gsm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m0x85"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10hg3"]
+albedo_color = Color(1, 0, 0.0705882, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n554q"]
+material = SubResource("StandardMaterial3D_10hg3")
+height = 0.1
+
+[node name="RedPickup" type="Area3D"]
+script = ExtResource("1_f6gsm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_m0x85")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_n554q")
