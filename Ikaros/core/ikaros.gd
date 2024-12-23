@@ -11,6 +11,8 @@ static var player_settings: IkarosPlayerSettings = preload("res://game/player_se
 
 static var score: int = 0
 
+static var _logger: LogStream = get_logger("Ikaros")
+
 
 static func get_logger(log_name: String) -> LogStream:
 	return LogStream.new(log_name, log_level)
@@ -18,4 +20,5 @@ static func get_logger(log_name: String) -> LogStream:
 
 ## Handles exiting the game
 static func quit(exit_code: int = 0) -> void:
+	_logger.info("Exiting")
 	Engine.get_main_loop().quit(exit_code)
