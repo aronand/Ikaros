@@ -18,7 +18,7 @@ Log/break_on_error=false
 config/name="Ikaros"
 config/version="0.0.1"
 run/main_scene="res://game/levels/movement_gym.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://ikaros_logo.svg"
 
 [debug]
@@ -110,4 +110,4 @@ open_debug_menu={
 
 [physics]
 
-3d/physics_engine="JoltPhysics3D"
+3d/physics_engine="Jolt Physics"

@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Godot 4.3
+- Godot 4.4
 - Python >= 3.7
 
 ## Running the linter
@@ -31,7 +31,7 @@ Prior to this there were two autoloads:
 
 ## Acknowledgments
 
-- [Godot Jolt](https://github.com/godot-jolt/godot-jolt)
 - [Godot Unit Test](https://github.com/bitwes/Gut)
 - [Log](https://github.com/albinaask/Log) (Note that this addon has been modified to remove its dependence on having an autoload)
 - [GDScript Toolkit](https://github.com/Scony/godot-gdscript-toolkit)
+
