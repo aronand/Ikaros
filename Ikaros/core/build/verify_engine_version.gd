@@ -1,9 +1,13 @@
 extends SceneTree  # We can't extend MainLoop as that lacks the quit() method
+## Script to verify that the engine version matches that of the project.
+##
+## This script should be called as follows: godot --headless --quit --script <path>
 
 var exit_code: int = 0
 
 
 func _initialize() -> void:
+	# Runs the verification when the script is initialized.
 	print("Project engine version: %s" % Ikaros.project_engine_version)
 	print("Engine version: %s" % Ikaros.engine_version)
 
@@ -16,4 +20,5 @@ func _initialize() -> void:
 
 
 func _finalize() -> void:
+	# Exits Godot with the given exit code
 	quit(exit_code)

@@ -1,34 +1,45 @@
 class_name Ikaros
+## Static class that houses commonly accessed members and methods.
 
+## Returns the default gravity as defined in project settings.
 static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+## Reference to the current player instance.
 static var player: IkarosCharacter = null
 
 # TODO: Define the player settings file in the editor
+## Holds settings affecting player behaviour.
 static var player_settings: IkarosPlayerSettings = preload("res://game/player_settings.tres")
 
+## Tracks the player score.
 static var score: int = 0
 
+## Returns the engine version as defined in project.godot.
+static var project_engine_version: String:
+	get:
+		return ProjectSettings.get_setting("application/config/features")[0] as String
+
+## Returns the engine version in "{major}.{minor}" format.
+static var engine_version: String:
+	get:
+		var version: Dictionary = Engine.get_version_info()
+		return "%d.%d" % [version["major"], version["minor"]]
+
+## Controls the current log level.
 static var log_level: LogStream.LogLevel:
 	get:
 		return LogStream.LogLevel.DEBUG
 
+## Logger for the Ikaros class.
 static var _logger: LogStream = null:
 	get:
 		if _logger == null:
 			_logger = get_logger("Ikaros")
 		return _logger
 
-static var project_engine_version: String:
-	get:
-		return ProjectSettings.get_setting("application/config/features")[0] as String
 
-static var engine_version: String:
-	get:
-		var version: Dictionary = Engine.get_version_info()
-		return "%d.%d" % [version["major"], version["minor"]]
-
-
+## Returns a logger with a given name. A common log name is the class name
+## without the Ikaros prefix.
 static func get_logger(log_name: String) -> LogStream:
 	return LogStream.new(log_name, log_level)
 
