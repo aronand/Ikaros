@@ -16,4 +16,5 @@ func _initialize() -> void:
 
 
 func _finalize() -> void:
+	Ikaros._logger.free()
 	quit(exit_code)
