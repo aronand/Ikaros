@@ -7,11 +7,11 @@ var camera_controller: IkarosCameraController
 
 
 func _init() -> void:
-	IkarosLog.debug("This is debug")
-	IkarosLog.info("This is info")
-	IkarosLog.warning("This is warning")
-	IkarosLog.error("This is error")
-	IkarosLog.fatal("This is fatal")
+	log_debug("This is debug")
+	log_info("This is info")
+	log_warning("This is warning")
+	log_error("This is error")
+	log_fatal("This is fatal")
 
 
 func _ready() -> void:

@@ -28,7 +28,7 @@ static var engine_version: String:
 
 ## Handles exiting the game
 static func quit(exit_code: int = 0) -> void:
-	IkarosLog.info("Exiting game.")
+	IkarosLog.info("Exiting game.", "Ikaros")
 	Engine.get_main_loop().quit(exit_code)
 
 
