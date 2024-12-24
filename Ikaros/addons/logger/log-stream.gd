@@ -1,8 +1,7 @@
 @tool
 class_name LogStream
 extends Node
-## Class that handles all the logging in the addon, methods can either be accessed through
-## the "GodotLogger" singelton, or you can instance this class yourself(no need to add it to the tree)
+## Class that handles logging.
 
 
 const settings := preload("./settings.gd")
@@ -278,7 +277,7 @@ func _get_reduced_stack(stack: Array) -> String:
 ## Internal method.
 func _set_level(level: LogLevel):
 	level = _get_external_log_level() if level == LogLevel.DEFAULT else level
-	info("setting log level to " + LogLevel.keys()[level])
+	info("Setting log level to " + LogLevel.keys()[level])
 	current_log_level = level
 
 
@@ -312,5 +311,5 @@ static func default_crash_behavior():
 	# Choose crash mechanism. Difference is that get_tree().quit() quits at the end of the frame,
 	# enabling multiple fatal errors to be cast, printing multiple stack traces etc.
 	# Warning regarding the use of OS.crash() in the docs can safely be regarded in this case.
-	OS.crash("Crash since falal error ocurred")
+	OS.crash("Crash since fatal error ocurred")
 	#get_tree().quit(-1)
