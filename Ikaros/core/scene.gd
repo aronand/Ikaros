@@ -1,5 +1,5 @@
 class_name IkarosScene
-extends Node
+extends IkarosNode
 
 @export var player: IkarosCharacter
 
@@ -9,7 +9,7 @@ var _logger: LogStream
 
 
 func _init() -> void:
-	_logger = Ikaros.get_logger("Scene")
+	_logger = Ikaros.get_logger(get_class_name())
 
 
 func _ready() -> void:

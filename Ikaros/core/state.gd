@@ -1,6 +1,6 @@
 ## Base class for all states. Based on finite state machine by GDQuest.
 class_name IkarosState
-extends Node
+extends IkarosNode
 
 signal finished(_next_state_path: String, _data: Dictionary)
 

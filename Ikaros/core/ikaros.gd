@@ -41,6 +41,7 @@ static var _logger: LogStream = null:
 ## Returns a logger with a given name. A common log name is the class name
 ## without the Ikaros prefix.
 static func get_logger(log_name: String) -> LogStream:
+	log_name = log_name.replace("Ikaros", "")
 	return LogStream.new(log_name, log_level)
 
 

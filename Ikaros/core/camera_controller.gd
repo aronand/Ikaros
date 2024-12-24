@@ -1,5 +1,5 @@
 class_name IkarosCameraController
-extends Node
+extends IkarosNode
 
 @export_category("Look Sensitivity")
 @export var mouse_sensitivity: float = 0.5
@@ -47,7 +47,7 @@ var is_first_person: bool = false:
 			camera.position.z = 0.0
 		is_first_person = value
 
-var _logger: LogStream = Ikaros.get_logger("CameraController")
+var _logger: LogStream = Ikaros.get_logger(get_class_name())
 var _rotation_input: float
 var _tilt_input: float
 var _mouse_rotation: Vector3
