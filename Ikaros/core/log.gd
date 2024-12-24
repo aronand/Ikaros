@@ -1,17 +1,12 @@
 class_name IkarosLog
 ## Static class to handle logging throughout a project.
 
-enum LogLevel {
-	DEBUG,
-	INFO,
-	WARNING,
-	ERROR,
-	FATAL
-}
+enum LogLevel { DEBUG, INFO, WARNING, ERROR, FATAL }
 
 static var current_log_level: LogLevel = LogLevel.DEBUG
 
 static var log_format: String = "[%s][%s] %s"
+
 
 static func debug(message: String, logger: String) -> void:
 	log_message(LogLevel.DEBUG, message, logger)
