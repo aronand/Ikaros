@@ -26,4 +26,4 @@ jobs:
         working-directory: ./Ikaros
         run: godot --headless --quit --import
       - name: Verify engine version
-        run: godot --headless --quit --script Ikaros/core/build/verify_engine_version.gd
+        run: godot --headless --quit --script Ikaros/scripts/verify_engine_version.gd
