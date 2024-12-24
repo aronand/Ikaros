@@ -22,5 +22,8 @@ jobs:
         shell: ash {0}
     steps:
       - uses: actions/checkout@v4
+      - name: Import project
+        working-directory: ./Ikaros
+        run: godot --headless --quit --import
       - name: Verify engine version
         run: godot --headless --quit --script Ikaros/core/build/verify_engine_version.gd
