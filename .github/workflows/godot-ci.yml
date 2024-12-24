@@ -22,5 +22,5 @@ jobs:
         shell: ash {0}
     steps:
       - uses: actions/checkout@v4
-      # TODO: Implement the actual check once Jolt works on godot-alpine
-      - run: godot --version
+      - name: Verify engine version
+        run: godot --headless --quit --script Ikaros/core/build/verify_engine_version.gd
