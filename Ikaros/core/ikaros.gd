@@ -13,6 +13,14 @@ static var score: int = 0
 
 static var _logger: LogStream = get_logger("Ikaros")
 
+static var project_engine_version: String:
+	get: return ProjectSettings.get_setting("application/config/features")[0] as String
+
+static var engine_version: String:
+	get:
+		var version: Dictionary = Engine.get_version_info()
+		return "%d.%d" % [version["major"], version["minor"]]
+
 
 static func get_logger(log_name: String) -> LogStream:
 	return LogStream.new(log_name, log_level)
@@ -26,9 +34,4 @@ static func quit(exit_code: int = 0) -> void:
 
 ## Compares the engine version defined in project.godot to the currently running engine.
 static func is_correct_engine_version() -> bool:
-	var project_engine_version: String = (
-		ProjectSettings.get_setting("application/config/features")[0] as String
-	)
-	var engine_version: Dictionary = Engine.get_version_info()
-	var engine_version_string: String = "%d.%d" % [engine_version["major"], engine_version["minor"]]
-	return project_engine_version == engine_version_string
+	return project_engine_version == engine_version
