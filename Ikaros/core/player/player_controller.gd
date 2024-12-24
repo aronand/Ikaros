@@ -83,6 +83,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_player.jump()
 		return
 
+	if Input.is_action_just_released("jump"):
+		_player.should_jump = false
+		return
+
 
 func player_can_jump() -> bool:
 	if _player.jump_count >= Ikaros.player_settings.max_jumps:
