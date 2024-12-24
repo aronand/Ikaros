@@ -8,17 +8,12 @@
 
 config_version=5
 
-[addons]
-
-Log/log_message_format="[lb]{hour}:{minute}:{second}[rb][lb]{level}[rb][lb]{log_name}[rb] {message}"
-Log/break_on_error=false
-
 [application]
 
 config/name="Ikaros"
 config/version="0.0.1"
 run/main_scene="res://game/levels/movement_gym.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://ikaros_logo.svg"
 
 [debug]
@@ -38,7 +33,7 @@ window/size/viewport_height=1080
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/logger/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 [global_group]
 
@@ -110,4 +105,4 @@ open_debug_menu={
 
 [physics]
 
-3d/physics_engine="JoltPhysics3D"
+3d/physics_engine="Jolt Physics"

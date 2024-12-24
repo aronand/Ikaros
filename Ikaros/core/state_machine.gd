@@ -1,6 +1,6 @@
 ## State machine. Based on finite state machine by GDQuest.
 class_name IkarosStateMachine
-extends Node
+extends IkarosNode
 
 @export var initial_state: IkarosState = null
 

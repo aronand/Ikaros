@@ -1,5 +1,5 @@
 class_name IkarosPlayerController
-extends Node
+extends IkarosNode
 
 var _player: IkarosCharacter
 
