@@ -32,6 +32,13 @@ func _init() -> void:
 	_player = null
 
 
+func _ready() -> void:
+	assert(get_parent() is IkarosScene)
+	var scene: IkarosScene = get_parent()
+	_camera_controller = scene.find_child("IkarosCameraController")
+	_player = scene.player
+
+
 func _process(_delta: float) -> void:
 	if _player == null:
 		return
@@ -59,13 +66,6 @@ func _process(_delta: float) -> void:
 
 	if _direction:
 		_player.move(_relative_direction)
-
-
-func _ready() -> void:
-	assert(get_parent() is IkarosScene)
-	var scene: IkarosScene = get_parent()
-	_camera_controller = scene.find_child("IkarosCameraController")
-	_player = scene.player
 
 
 func _unhandled_input(event: InputEvent) -> void:
