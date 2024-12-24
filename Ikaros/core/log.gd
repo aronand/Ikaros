@@ -31,7 +31,10 @@ static func fatal(message: String, logger: String) -> void:
 static func log_message(level: LogLevel, message: String, logger: String) -> void:
 	if level < current_log_level:
 		return
+	_log.call_deferred(level, message, logger)
 
+
+static func _log(level: LogLevel, message: String, logger: String) -> void:
 	var level_string: String = LogLevel.keys()[level]
 	var formatted_message: String = log_format % [level_string, logger, message]
 
