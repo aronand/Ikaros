@@ -14,7 +14,8 @@ static var score: int = 0
 static var _logger: LogStream = get_logger("Ikaros")
 
 static var project_engine_version: String:
-	get: return ProjectSettings.get_setting("application/config/features")[0] as String
+	get:
+		return ProjectSettings.get_setting("application/config/features")[0] as String
 
 static var engine_version: String:
 	get:
