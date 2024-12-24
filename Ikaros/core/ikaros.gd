@@ -1,7 +1,5 @@
 class_name Ikaros
 
-static var log_level: LogStream.LogLevel = LogStream.LogLevel.DEBUG
-
 static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 static var player: IkarosCharacter = null
@@ -11,7 +9,15 @@ static var player_settings: IkarosPlayerSettings = preload("res://game/player_se
 
 static var score: int = 0
 
-static var _logger: LogStream = get_logger("Ikaros")
+static var log_level: LogStream.LogLevel:
+	get:
+		return LogStream.LogLevel.DEBUG
+
+static var _logger: LogStream = null:
+	get:
+		if _logger == null:
+			_logger = get_logger("Ikaros")
+		return _logger
 
 static var project_engine_version: String:
 	get:
