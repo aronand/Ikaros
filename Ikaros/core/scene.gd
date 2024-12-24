@@ -6,6 +6,14 @@ extends IkarosNode
 var camera_controller: IkarosCameraController
 
 
+func _init() -> void:
+	IkarosLog.debug("This is debug")
+	IkarosLog.info("This is info")
+	IkarosLog.warning("This is warning")
+	IkarosLog.error("This is error")
+	IkarosLog.fatal("This is fatal")
+
+
 func _ready() -> void:
 	var camera_controller_nodes: Array[Node] = find_children("", "IkarosCameraController")
 	camera_controller = camera_controller_nodes.front() as IkarosCameraController

@@ -25,29 +25,10 @@ static var engine_version: String:
 		var version: Dictionary = Engine.get_version_info()
 		return "%d.%d" % [version["major"], version["minor"]]
 
-## Controls the current log level.
-static var log_level: LogStream.LogLevel:
-	get:
-		return LogStream.LogLevel.DEBUG
-
-## Logger for the Ikaros class.
-static var _logger: LogStream = null:
-	get:
-		if _logger == null:
-			_logger = get_logger("Ikaros")
-		return _logger
-
-
-## Returns a logger with a given name. A common log name is the class name
-## without the Ikaros prefix.
-static func get_logger(log_name: String) -> LogStream:
-	log_name = log_name.replace("Ikaros", "")
-	return LogStream.new(log_name, log_level)
-
 
 ## Handles exiting the game
 static func quit(exit_code: int = 0) -> void:
-	_logger.info("Exiting")
+	IkarosLog.info("Exiting game.")
 	Engine.get_main_loop().quit(exit_code)
 
 
