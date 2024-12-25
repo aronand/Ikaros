@@ -28,7 +28,7 @@ jobs:
       - name: Verify engine version
         working-directory: ./Ikaros
         run: |
-          ENGINE_VERSION=`godot --version | grep -o "^\d+.\d+"`
+          ENGINE_VERSION=`godot --version | grep -o "^\d*.\d*"`
           PROJECT_ENGINE_VERSION=`grep "^config\/features.*" project.godot | grep -oE "\d+.\d+"`
           if [ $ENGINE_VERSION != $PROJECT_ENGINE_VERSION ]; then
             echo "::error title=Engine version mismatch::Engine version used in CI ($ENGINE_VERSION) doesn't match project engine version ($PROJECT_ENGINE_VERSION). Make sure you've updated the image if you've recently upgraded the project to a new version of Godot."
