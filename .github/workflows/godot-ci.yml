@@ -16,7 +16,7 @@ jobs:
     name: "godot: check scripts"
     runs-on: ubuntu-latest
     container:
-      image: aronand/godot-alpine:4.3
+      image: aronand/godot-alpine:4.4-dev-7
     defaults:
       run:
         shell: ash {0}
