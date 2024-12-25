@@ -40,7 +40,9 @@ func _process(_delta: float) -> void:
 		"move_right", "move_left", "move_backward", "move_forward"
 	)
 
-	_direction = (Ikaros.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
+	_direction = (
+		(Ikaros.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
+	)
 
 	# HACK: Rotate the player character's collision shape to match with camera node.
 	# This will rotate the mesh as well. Cursed af, but works for now.
