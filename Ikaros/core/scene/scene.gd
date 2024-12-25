@@ -1,8 +1,6 @@
 class_name IkarosScene
 extends IkarosNode
 
-static var count: int = 0
-
 @export var player: IkarosCharacter
 
 var camera_controller: IkarosCameraController
@@ -34,7 +32,5 @@ func attach_camera_to_player() -> void:
 		return
 
 	log_info("Attaching camera to player.")
-	count += 1
-	print(count)
 	player.add_child(camera_controller.camera_root)
 	camera_controller.camera_root.set_owner(player)

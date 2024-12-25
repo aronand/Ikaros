@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_key_pressed(KEY_1):
+	if Input.is_action_just_pressed("open_debug_menu"):
 		change_map("res://game/levels/test_gym.tscn")
 
 
@@ -37,9 +37,8 @@ func change_map(path: String) -> void:
 	var change_map_lambda = func(path: String) -> void:
 		remove_child(current_scene)
 		current_scene.free()
-		var scene: IkarosScene = load(path).instantiate() as IkarosScene
-		_add_scene(scene)
+		var scene: Resource = load(path)
+		_add_scene(scene.instantiate() as IkarosScene)
 		camera_controller.reset_rotation_vectors()
 
-	# BUG: scene.init() is sometimes called multiple times
 	change_map_lambda.call_deferred(path)
