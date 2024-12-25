@@ -26,6 +26,7 @@ jobs:
         working-directory: ./Ikaros
         run: godot --headless --quit --import
       - name: Verify engine version
+        working-directory: ./Ikaros
         run: |
           ENGINE_VERSION=`godot --version | grep -oP "^\d*.\d"`
           PROJECT_ENGINE_VERSION=`grep -oP '^config\/features=PackedStringArray\("\K\d*.\d*' project.godot`
