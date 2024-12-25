@@ -34,7 +34,7 @@ func _add_scene(scene: IkarosScene) -> void:
 
 
 func change_map(path: String) -> void:
-	var _change_map = func (path: String) -> void:
+	var change_map_lambda = func(path: String) -> void:
 		remove_child(current_scene)
 		current_scene.free()
 		var scene: IkarosScene = load(path).instantiate() as IkarosScene
@@ -42,4 +42,4 @@ func change_map(path: String) -> void:
 		camera_controller.reset_rotation_vectors()
 
 	# BUG: scene.init() is sometimes called multiple times
-	_change_map.call_deferred(path)
+	change_map_lambda.call_deferred(path)

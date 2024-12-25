@@ -1,11 +1,11 @@
 class_name IkarosScene
 extends IkarosNode
 
+static var count: int = 0
+
 @export var player: IkarosCharacter
 
 var camera_controller: IkarosCameraController
-
-static var count: int = 0
 
 
 func init() -> void:
