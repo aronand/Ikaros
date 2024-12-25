@@ -16,7 +16,7 @@ jobs:
     name: "godot: check scripts"
     runs-on: ubuntu-latest
     container:
-      image: aronand/godot-alpine:4.3
+      image: aronand/godot-alpine:4.4-dev-7
     defaults:
       run:
         shell: ash {0}
@@ -26,4 +26,40 @@ jobs:
         working-directory: ./Ikaros
         run: godot --headless --quit --import
       - name: Verify engine version
-        run: godot --headless --quit --script Ikaros/scripts/verify_engine_version.gd
+        working-directory: ./Ikaros
+        run: |
+          ENGINE_VERSION=`godot --version | grep -o "^\d*.\d*"`
+          PROJECT_ENGINE_VERSION=`grep "^config\/features.*" project.godot | grep -oE "\d+.\d+"`
+          if [ $ENGINE_VERSION != $PROJECT_ENGINE_VERSION ]; then
+            echo "::error title=Engine version mismatch::Engine version used in CI ($ENGINE_VERSION) doesn't match project engine version ($PROJECT_ENGINE_VERSION). Make sure you've updated the image if you've recently upgraded the project to a new version of Godot."
+            exit 1
+          fi
+      - name: Check scripts
+        working-directory: ./Ikaros
+        run: |
+          FAILED=0
+
+          # core
+          echo "Validating core"
+          while read file; do
+            echo $file
+            godot --headless --quit --check-only --script $file
+            if [ $? -ne 0 ]; then
+              FAILED=1
+            fi
+          done < <(find ./core -type f -name *.gd)
+
+          # game
+          echo "Validating game"
+          while read file; do
+            echo $file
+            godot --headless --quit --check-only --script $file
+            if [ $? -ne 0 ]; then
+              FAILED=1
+            fi
+          done < <(find ./game -type f -name *.gd)
+
+          if [ $FAILED -eq 1 ]; then
+            echo "::error::Scripts had errors."
+            exit 1
+          fi

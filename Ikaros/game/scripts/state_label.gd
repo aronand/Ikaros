@@ -1,14 +1,11 @@
 extends Label
 
-var state_machine: IkarosStateMachine
-var state: IkarosCharacterState
-
-
-func _ready() -> void:
-	var parent: IkarosScene = owner as IkarosScene
-	state_machine = parent.player.find_child("IkarosStateMachine")
+var state_machine: IkarosStateMachine = null:
+	get:
+		if state_machine == null:
+			state_machine = Ikaros.player.find_child("IkarosStateMachine")
+		return state_machine
 
 
 func _process(_delta: float) -> void:
-	state = state_machine.state
-	text = "State: %s" % state.name
+	text = "State: %s" % state_machine.state.name

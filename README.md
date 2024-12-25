@@ -2,21 +2,29 @@
 
 ## Requirements
 
-- Godot 4.4
+- Godot 4.4 dev 7
 - Python >= 3.7
 
-## Running the linter
+## Running gdtoolkit
 
-Before pushing code to GitHub you should run the linter on the project.
+Before pushing code to GitHub you should run the linter and the formatter on the project.
 
-### Install gdtoolkit
+### Installation
 
-Set up and activate a virtual environment in the project root and run `pip install -r requirements.txt`.
+Set up and activate a Python virtual environment in the project root and run `pip install -r requirements.txt`.
 
-### Run the linter
+### gdlint
 
-With gdtoolkit installed in the venv, run `gdlint Ikaros/core Ikaros/game` in the terminal.
+Run `gdlint Ikaros/core Ikaros/game` in the terminal.
 Fix any errors in your code the linter may find.
+
+### gdformat
+
+Run `gdformat -c Ikaros/core Ikaros/game` in the terminal to check if the formatter finds any issues with the code.
+
+Run `gdformat -d Ikaros/core Ikaros/game` to show what the formatter would change.
+
+Run `gdformat Ikaros/core Ikaros/game` to let the formatter edit the code, or make manual changes to satisfy the formatter.
 
 ## About autoloads
 

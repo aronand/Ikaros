@@ -1,23 +1,21 @@
 class_name IkarosPlayerController
 extends IkarosNode
 
-var _player: IkarosCharacter
-
 var _col_shape: CollisionShape3D = null:
 	get:
-		if _player == null:
+		if Ikaros.player == null:
 			return null
 		if _col_shape == null:
-			_col_shape = _player.find_child("CollisionShape3D")
+			_col_shape = Ikaros.player.find_child("CollisionShape3D")
 		return _col_shape
 
 var _camera_controller: IkarosCameraController
 var _camera_root: Node3D = null:
 	get:
-		if _player == null:
+		if Ikaros.player == null:
 			return null
 		if _camera_root == null:
-			_camera_root = _player.find_child("CameraRoot")
+			_camera_root = Ikaros.player.find_child("CameraRoot")
 		return _camera_root
 
 var _direction: Vector3
@@ -28,26 +26,23 @@ var _relative_direction: Vector3:
 		return Vector3.ZERO
 
 
-func _init() -> void:
-	_player = null
-
-
 func _ready() -> void:
-	assert(get_parent() is IkarosScene)
-	var scene: IkarosScene = get_parent()
-	_camera_controller = scene.find_child("IkarosCameraController")
-	_player = scene.player
+	assert(get_parent() is IkarosSceneManager)
+	var scene_manager: IkarosSceneManager = get_parent()
+	_camera_controller = scene_manager.find_child("IkarosCameraController")
 
 
 func _process(_delta: float) -> void:
-	if _player == null:
+	if Ikaros.player == null:
 		return
 
 	var input_dir: Vector2 = Input.get_vector(
 		"move_right", "move_left", "move_backward", "move_forward"
 	)
 
-	_direction = (_player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
+	_direction = (
+		(Ikaros.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
+	)
 
 	# HACK: Rotate the player character's collision shape to match with camera node.
 	# This will rotate the mesh as well. Cursed af, but works for now.
@@ -65,7 +60,7 @@ func _process(_delta: float) -> void:
 			_col_shape.rotation.y = _camera_root.rotation.y
 
 	if _direction:
-		_player.move(_relative_direction)
+		Ikaros.player.move(_relative_direction)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -80,24 +75,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if Input.is_action_just_pressed("jump") and player_can_jump():
-		_player.jump()
+		Ikaros.player.jump()
 		return
 
 	if Input.is_action_just_released("jump"):
-		_player.should_jump = false
+		Ikaros.player.should_jump = false
 		return
 
 
 func player_can_jump() -> bool:
-	if _player.jump_count >= Ikaros.player_settings.max_jumps:
+	if Ikaros.player.jump_count >= Ikaros.player_settings.max_jumps:
 		return false
 
-	if _player.state.name == IkarosCharacterState.FALLING:
+	if Ikaros.player.state.name == IkarosCharacterState.FALLING:
 		# Blocks the jump impulse if we've entered the falling state without jumping
-		if not Ikaros.player_settings.can_jump_when_falling and _player.jump_count == 0:
+		if not Ikaros.player_settings.can_jump_when_falling and Ikaros.player.jump_count == 0:
 			return false
 
-	if _player.state.name in IkarosCharacter.IN_AIR_STATES:
+	if Ikaros.player.state.name in IkarosCharacter.IN_AIR_STATES:
 		if not Ikaros.player_settings.can_multi_jump:
 			return false
 
