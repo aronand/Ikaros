@@ -1,14 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bupmrodlohajo"]
+[gd_scene load_steps=10 format=3 uid="uid://bupmrodlohajo"]
 
 [ext_resource type="Script" uid="uid://dshk5jq7fo0lx" path="res://core/scene/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
 [ext_resource type="PackedScene" uid="uid://byueo6oe0tjn7" path="res://game/assets/character.tscn" id="3_k15d2"]
-[ext_resource type="Script" uid="uid://by5moiyoiin3k" path="res://game/scripts/debug_ui.gd" id="6_2e0fi"]
-[ext_resource type="Script" uid="uid://cw4lsebl066r0" path="res://game/scripts/fps_label.gd" id="6_hctuc"]
-[ext_resource type="Script" uid="uid://daucd5j2qk3ib" path="res://game/scripts/state_label.gd" id="6_umpi3"]
-[ext_resource type="Script" uid="uid://b3m2m2838riga" path="res://game/scripts/frametime_label.gd" id="7_jjrh0"]
 [ext_resource type="PackedScene" uid="uid://k082b3voi8di" path="res://game/assets/red_pickup.tscn" id="9_5850r"]
-[ext_resource type="Script" uid="uid://ds7662eu0x4mc" path="res://game/scripts/score_label.gd" id="9_scdib"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a575k"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -137,40 +132,6 @@ shape = SubResource("BoxShape3D_ejrd6")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Box02/CollisionShape3D"]
 mesh = SubResource("BoxMesh_ms3b6")
 skeleton = NodePath("../..")
-
-[node name="DebugUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("6_2e0fi")
-
-[node name="Panel" type="PanelContainer" parent="DebugUI"]
-layout_mode = 0
-offset_right = 146.0
-offset_bottom = 77.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DebugUI/Panel"]
-layout_mode = 2
-
-[node name="FPSLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("6_hctuc")
-
-[node name="FrametimeLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("7_jjrh0")
-
-[node name="StateLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-text = "State: lorem ipsum"
-script = ExtResource("6_umpi3")
-
-[node name="ScoreLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("9_scdib")
 
 [node name="RedPickup" parent="." instance=ExtResource("9_5850r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8764, 0.25, -13.614)

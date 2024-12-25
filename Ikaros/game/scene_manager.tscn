@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnak0wrfv7gg6"]
+[gd_scene load_steps=11 format=3 uid="uid://dnak0wrfv7gg6"]
 
 [ext_resource type="Script" uid="uid://d34eyojosuavs" path="res://core/scene/scene_manager.gd" id="1_rqs5t"]
 [ext_resource type="PackedScene" uid="uid://bupmrodlohajo" path="res://game/levels/movement_gym.tscn" id="2_gqnuj"]
 [ext_resource type="Script" uid="uid://cbxphibj2wp3w" path="res://core/camera_controller.gd" id="2_rili2"]
 [ext_resource type="Script" uid="uid://sa7oxe737cnj" path="res://core/player/player_controller.gd" id="3_gqnuj"]
 [ext_resource type="Script" uid="uid://dv1hff3i17aud" path="res://game/scripts/esc_exit_game.gd" id="4_rili2"]
+[ext_resource type="Script" uid="uid://by5moiyoiin3k" path="res://game/scripts/debug_ui.gd" id="6_paojs"]
+[ext_resource type="Script" uid="uid://cw4lsebl066r0" path="res://game/scripts/fps_label.gd" id="7_npi3c"]
+[ext_resource type="Script" uid="uid://b3m2m2838riga" path="res://game/scripts/frametime_label.gd" id="8_e3b08"]
+[ext_resource type="Script" uid="uid://daucd5j2qk3ib" path="res://game/scripts/state_label.gd" id="9_uduow"]
+[ext_resource type="Script" uid="uid://ds7662eu0x4mc" path="res://game/scripts/score_label.gd" id="10_sbthc"]
 
 [node name="IkarosSceneManager" type="Node"]
 script = ExtResource("1_rqs5t")
@@ -21,3 +26,37 @@ metadata/_custom_type_script = ExtResource("3_gqnuj")
 
 [node name="EscExitGame" type="Node" parent="."]
 script = ExtResource("4_rili2")
+
+[node name="DebugUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("6_paojs")
+
+[node name="Panel" type="PanelContainer" parent="DebugUI"]
+layout_mode = 0
+offset_right = 146.0
+offset_bottom = 77.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugUI/Panel"]
+layout_mode = 2
+
+[node name="FPSLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("7_npi3c")
+
+[node name="FrametimeLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_e3b08")
+
+[node name="StateLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "State: lorem ipsum"
+script = ExtResource("9_uduow")
+
+[node name="ScoreLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("10_sbthc")

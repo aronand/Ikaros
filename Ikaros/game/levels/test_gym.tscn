@@ -1,13 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4rd51makvdis"]
+[gd_scene load_steps=10 format=3 uid="uid://c4rd51makvdis"]
 
 [ext_resource type="Script" uid="uid://dshk5jq7fo0lx" path="res://core/scene/scene.gd" id="1_p2t48"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="2_ydqwq"]
 [ext_resource type="PackedScene" uid="uid://byueo6oe0tjn7" path="res://game/assets/character.tscn" id="3_7kfm6"]
-[ext_resource type="Script" uid="uid://by5moiyoiin3k" path="res://game/scripts/debug_ui.gd" id="4_46npv"]
-[ext_resource type="Script" uid="uid://cw4lsebl066r0" path="res://game/scripts/fps_label.gd" id="5_sn05w"]
-[ext_resource type="Script" uid="uid://b3m2m2838riga" path="res://game/scripts/frametime_label.gd" id="6_ungvp"]
-[ext_resource type="Script" uid="uid://daucd5j2qk3ib" path="res://game/scripts/state_label.gd" id="7_wbvhn"]
-[ext_resource type="Script" uid="uid://ds7662eu0x4mc" path="res://game/scripts/score_label.gd" id="8_e5wpy"]
 [ext_resource type="PackedScene" uid="uid://k082b3voi8di" path="res://game/assets/red_pickup.tscn" id="9_4x857"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a575k"]
@@ -132,37 +127,3 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3036, 1.2622, -10.9791)
 is_magnetic = true
 faces_player = true
-
-[node name="DebugUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("4_46npv")
-
-[node name="Panel" type="PanelContainer" parent="DebugUI"]
-layout_mode = 0
-offset_right = 146.0
-offset_bottom = 77.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DebugUI/Panel"]
-layout_mode = 2
-
-[node name="FPSLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("5_sn05w")
-
-[node name="FrametimeLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("6_ungvp")
-
-[node name="StateLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-text = "State: lorem ipsum"
-script = ExtResource("7_wbvhn")
-
-[node name="ScoreLabel" type="Label" parent="DebugUI/Panel/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("8_e5wpy")

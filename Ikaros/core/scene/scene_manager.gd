@@ -11,7 +11,7 @@ var camera_controller: IkarosCameraController:
 
 
 func _init() -> void:
-	pass
+	Ikaros.scene_manager = self
 
 
 func _ready() -> void:

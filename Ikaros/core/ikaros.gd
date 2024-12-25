@@ -14,6 +14,9 @@ static var player_settings: IkarosPlayerSettings = preload("res://game/player_se
 ## Tracks the player score.
 static var score: int = 0
 
+## Reference to the scene manager
+static var scene_manager: IkarosSceneManager = null
+
 ## Returns the engine version as defined in project.godot.
 static var project_engine_version: String:
 	get:
