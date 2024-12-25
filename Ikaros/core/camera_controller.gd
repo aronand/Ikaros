@@ -54,7 +54,7 @@ var _camera_rotation: Vector3
 
 
 func _ready() -> void:
-	assert(get_parent() is IkarosScene)
+	#assert(get_parent() is IkarosScene)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 

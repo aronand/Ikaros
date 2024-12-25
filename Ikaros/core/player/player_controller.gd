@@ -32,11 +32,11 @@ func _init() -> void:
 	_player = null
 
 
-func _ready() -> void:
-	assert(get_parent() is IkarosScene)
-	var scene: IkarosScene = get_parent()
-	_camera_controller = scene.find_child("IkarosCameraController")
-	_player = scene.player
+#func _ready() -> void:
+	#assert(get_parent() is IkarosScene)
+	#var scene: IkarosScene = get_parent()
+	#_camera_controller = scene.find_child("IkarosCameraController")
+	#_player = scene.player
 
 
 func _process(_delta: float) -> void:

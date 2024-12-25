@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnak0wrfv7gg6"]
+
+[ext_resource type="Script" uid="uid://d34eyojosuavs" path="res://core/scene/scene_manager.gd" id="1_rqs5t"]
+[ext_resource type="Script" uid="uid://cbxphibj2wp3w" path="res://core/camera_controller.gd" id="2_rili2"]
+[ext_resource type="Script" uid="uid://sa7oxe737cnj" path="res://core/player/player_controller.gd" id="3_gqnuj"]
+
+[node name="IkarosSceneManager" type="Node"]
+script = ExtResource("1_rqs5t")
+metadata/_custom_type_script = ExtResource("1_rqs5t")
+
+[node name="IkarosCameraController" type="Node" parent="."]
+script = ExtResource("2_rili2")
+metadata/_custom_type_script = ExtResource("2_rili2")
+
+[node name="IkarosPlayerController" type="Node" parent="."]
+script = ExtResource("3_gqnuj")
+metadata/_custom_type_script = ExtResource("3_gqnuj")

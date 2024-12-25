@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bupmrodlohajo"]
 
-[ext_resource type="Script" uid="uid://dshk5jq7fo0lx" path="res://core/scene.gd" id="1_dq8hd"]
+[ext_resource type="Script" uid="uid://dshk5jq7fo0lx" path="res://core/scene/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
 [ext_resource type="Script" uid="uid://sa7oxe737cnj" path="res://core/player/player_controller.gd" id="2_4v1bt"]
 [ext_resource type="Script" uid="uid://cbxphibj2wp3w" path="res://core/camera_controller.gd" id="2_q73t8"]
