@@ -1,10 +1,6 @@
 name: "godot-ci"
 on: push
 
-defaults:
-  run:
-    working-directory: ./Ikaros
-
 jobs:
   gdtoolkit:
     name: "gdtoolkit: gdformat and gdlint"
@@ -12,9 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Scony/godot-gdscript-toolkit@master
-      - run: gdformat --check core game
+      - run: gdformat --check Ikaros/core Ikaros/game
         if: always()
-      - run: gdlint core game
+      - run: gdlint Ikaros/core Ikaros/game
         if: always()
   godot-check-scripts:
     name: "godot: check scripts"
@@ -27,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Import project
+        working-directory: ./Ikaros
         run: godot --headless --quit --import
       - name: Verify engine version
-        run: godot --headless --quit --script scripts/verify_engine_version.gd
+        working-directory: ./Ikaros
+        run: godot --headless --quit --script scripts/verify_engine_version.gd      
