@@ -5,6 +5,10 @@ extends IkarosNode
 
 var current_scene: IkarosScene = null
 
+var camera_controller: IkarosCameraController:
+	get:
+		return find_child("IkarosCameraController")
+
 
 func _init() -> void:
 	pass
@@ -35,6 +39,7 @@ func change_map(path: String) -> void:
 		current_scene.free()
 		var scene: IkarosScene = load(path).instantiate() as IkarosScene
 		_add_scene(scene)
+		camera_controller.reset_rotation_vectors()
 
 	# BUG: scene.init() is sometimes called multiple times
 	_change_map.call_deferred(path)

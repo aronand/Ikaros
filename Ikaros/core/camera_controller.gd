@@ -111,3 +111,8 @@ func handle_camera_rotation(delta: float) -> void:
 
 	_rotation_input = 0.0
 	_tilt_input = 0.0
+
+
+func reset_rotation_vectors() -> void:
+	_mouse_rotation = Vector3.ZERO
+	_camera_rotation = Vector3.ZERO
