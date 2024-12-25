@@ -40,7 +40,9 @@ jobs:
           FAILED=0
 
           # core
+          echo "Validating core"
           while read file; do
+            echo $file
             godot --headless --quit --check-only --script $file
             if [ $? -ne 0 ]; then
               FAILED=1
@@ -48,7 +50,9 @@ jobs:
           done < <(find ./core -type f -name *.gd)
 
           # game
+          echo "Validating game"
           while read file; do
+            echo $file
             godot --headless --quit --check-only --script $file
             if [ $? -ne 0 ]; then
               FAILED=1
