@@ -34,3 +34,28 @@ jobs:
             echo "::error title=Engine version mismatch::Engine version used in CI ($ENGINE_VERSION) doesn't match project engine version ($PROJECT_ENGINE_VERSION). Make sure you've updated the image if you've recently upgraded the project to a new version of Godot."
             exit 1
           fi
+      - name: Check scripts
+        working-directory: ./Ikaros
+        run: |
+          FAILED=0
+
+          # core
+          while read file; do
+            godot --headless --quit --check-only --script $file
+            if [ $? -ne 0 ]; then
+              FAILED=1
+            fi
+          done < <(find ./core -type f -name *.gd)
+
+          # game
+          while read file; do
+            godot --headless --quit --check-only --script $file
+            if [ $? -ne 0 ]; then
+              FAILED=1
+            fi
+          done < <(find ./game -type f -name *.gd)
+
+          if [ $FAILED -eq 1 ]; then
+            echo "::error::Scripts had errors."
+            exit 1
+          fi
