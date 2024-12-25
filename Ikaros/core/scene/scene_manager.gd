@@ -14,16 +14,27 @@ func _ready() -> void:
 	assert(has_node("IkarosCameraController"))
 	assert(has_node("IkarosPlayerController"))
 	assert(default_scene != null)
-	_load_default_scene()
+	_add_scene(default_scene.instantiate() as IkarosScene)
 
 
-func _process(_delta: float) -> void:
-	pass
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_1):
+		change_map("res://game/levels/test_gym.tscn")
 
 
-func _load_default_scene() -> void:
-	var scene = default_scene.instantiate()
+func _add_scene(scene: IkarosScene) -> void:
 	add_child(scene)
 	scene.owner = self
 	scene.init()
 	current_scene = scene
+
+
+func change_map(path: String) -> void:
+	var _change_map = func (path: String) -> void:
+		remove_child(current_scene)
+		current_scene.free()
+		var scene: IkarosScene = load(path).instantiate() as IkarosScene
+		_add_scene(scene)
+
+	# BUG: scene.init() is sometimes called multiple times
+	_change_map.call_deferred(path)

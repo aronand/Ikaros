@@ -5,6 +5,8 @@ extends IkarosNode
 
 var camera_controller: IkarosCameraController
 
+static var count: int = 0
+
 
 func init() -> void:
 	var camera_controller_nodes: Array[Node] = owner.find_children("", "IkarosCameraController")
@@ -32,5 +34,7 @@ func attach_camera_to_player() -> void:
 		return
 
 	log_info("Attaching camera to player.")
+	count += 1
+	print(count)
 	player.add_child(camera_controller.camera_root)
 	camera_controller.camera_root.set_owner(player)
