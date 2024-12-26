@@ -1,6 +1,7 @@
 class_name IkarosPlayerController
 extends IkarosNode
 
+## Reference to the player collision shape. Null if player is null.
 var _col_shape: CollisionShape3D = null:
 	get:
 		if Ikaros.player == null:
@@ -9,7 +10,10 @@ var _col_shape: CollisionShape3D = null:
 			_col_shape = Ikaros.player.find_child("CollisionShape3D")
 		return _col_shape
 
-var _camera_controller: IkarosCameraController
+## Reference to the camera controller.
+var _camera_controller: IkarosCameraController  # TODO: Store in Ikaros instead?
+
+## Reference to the camera root node. Null if player is null.
 var _camera_root: Node3D = null:
 	get:
 		if Ikaros.player == null:
@@ -18,29 +22,26 @@ var _camera_root: Node3D = null:
 			_camera_root = Ikaros.player.find_child("CameraRoot")
 		return _camera_root
 
+## Keeps track of movement direction based on user input.
 var _direction: Vector3
-var _relative_direction: Vector3:
-	get:
-		if _direction != Vector3.ZERO:
-			return _direction.rotated(Vector3.UP, _camera_root.rotation.y)
-		return Vector3.ZERO
+
+## Keeps track of movement direction relative to camera rotation.
+var _relative_direction: Vector3
 
 
 func _ready() -> void:
 	assert(get_parent() is IkarosSceneManager)
-	var scene_manager: IkarosSceneManager = get_parent()
-	_camera_controller = scene_manager.find_child("IkarosCameraController")
+	_camera_controller = get_parent().find_child("IkarosCameraController")
 
 
 func _process(_delta: float) -> void:
 	if Ikaros.player == null:
 		return
 
+	# Get a movement direction vector from player input
 	var input_dir: Vector2 = get_input_vector()
-
-	_direction = (
-		(Ikaros.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
-	)
+	_direction = Vector3(input_dir.x, 0, input_dir.y)
+	_relative_direction = _direction.rotated(Vector3.UP, _camera_root.rotation.y)
 
 	# HACK: Rotate the player character's collision shape to match with camera node.
 	# This will rotate the mesh as well. Cursed af, but works for now.
@@ -80,6 +81,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 
+## Verifies that the player is able to jump by checking the current state
+## of the player, and settings defined in IkarosPlayerSettings.
 func player_can_jump() -> bool:
 	if Ikaros.player.jump_count >= Ikaros.player_settings.max_jumps:
 		return false
