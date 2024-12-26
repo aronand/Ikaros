@@ -36,9 +36,7 @@ func _process(_delta: float) -> void:
 	if Ikaros.player == null:
 		return
 
-	var input_dir: Vector2 = Input.get_vector(
-		"move_right", "move_left", "move_backward", "move_forward"
-	)
+	var input_dir: Vector2 = get_input_vector()
 
 	_direction = (
 		(Ikaros.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).limit_length()
@@ -53,7 +51,6 @@ func _process(_delta: float) -> void:
 
 	if not _camera_controller.is_first_person and _direction:
 		if Ikaros.player_settings.face_movement_direction:
-			# TODO: Janky, make it better
 			_col_shape.look_at(_col_shape.global_transform.origin - _relative_direction)
 			_col_shape.rotation.x = 0.0
 		else:
@@ -97,3 +94,20 @@ func player_can_jump() -> bool:
 			return false
 
 	return true
+
+
+## Returns a Vector2 created from movement input. Defaults to returning the input from
+## the joypad if it is being used. Note that this may cause false input on a controller
+func get_input_vector() -> Vector2:
+	var input_vec: Vector2
+
+	# Joypad input
+	input_vec = Input.get_vector(
+		"move_right_joy", "move_left_joy", "move_backward_joy", "move_forward_joy"
+	)
+
+	if input_vec != Vector2.ZERO:
+		return input_vec
+
+	# Keyboard input
+	return Input.get_vector("move_right", "move_left", "move_backward", "move_forward")
