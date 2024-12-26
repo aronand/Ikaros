@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 
 	# Get a movement direction vector from player input
 	var input_dir: Vector2 = get_input_vector()
-	_direction = Vector3(input_dir.x, 0, input_dir.y)
+	_direction = Ikaros.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)
 	_relative_direction = _direction.rotated(Vector3.UP, _camera_root.rotation.y)
 
 	# HACK: Rotate the player character's collision shape to match with camera node.
