@@ -21,8 +21,7 @@ func physics_update(delta: float) -> void:
 		character.apply_direction_to_velocity(delta)
 	var collided: bool = character.move_and_slide()
 
-	# BUG: This will trigger for _any_ collision, not just collisions overhead
-	if collided:
+	if collided and character.overhead_shapecast.is_colliding():
 		character.should_jump = false
 	elif character.position.y - _start_y >= character.jump_max_height:
 		character.should_jump = false

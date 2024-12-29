@@ -40,6 +40,8 @@ var state: IkarosCharacterState:
 
 var _state_machine: IkarosStateMachine
 
+@onready var overhead_shapecast: ShapeCast3D = find_child("ShapeCast3D")
+
 
 func _enter_tree() -> void:
 	add_to_group("characters")
