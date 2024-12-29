@@ -59,6 +59,7 @@ func _process(_delta: float) -> void:
 
 	if _direction:
 		Ikaros.player.move(_relative_direction)
+		Ikaros.player.should_sprint = Input.is_action_pressed("sprint")
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -11,6 +11,9 @@ const IN_AIR_STATES: Array[String] = [
 ## Character's movement speed
 @export var speed: float = 2.5
 
+## Character's movement speed while sprinting
+@export var sprint_speed: float = 5.0
+
 ## Character's jump speed
 @export var jump_velocity: float = 4.0
 
@@ -21,6 +24,13 @@ const IN_AIR_STATES: Array[String] = [
 ## when in a state that can transition to a jump.
 var should_jump: bool = false
 
+## Controls character movement speed.
+var should_sprint: bool = false
+
+## Controls movement direction. State machine will move to moving state if this
+## is not equal to Vector3.ZERO
+var direction: Vector3 = Vector3.ZERO
+
 ## Tracks how many times the player has jumped before touching the ground again.
 ## Sets itself back to 0 when accessed while on the ground.
 var jump_count: int = 0:
@@ -28,10 +38,6 @@ var jump_count: int = 0:
 		if is_on_floor():
 			jump_count = 0
 		return jump_count
-
-## Controls movement direction. State machine will move to moving state if this
-## is not equal to Vector3.ZERO
-var direction: Vector3 = Vector3.ZERO
 
 ## Getter for character's current state.
 var state: IkarosCharacterState:
@@ -69,6 +75,7 @@ func move(move_direction: Vector3) -> void:
 ## Applies direction to velocity. This method should only be called from
 ## within the state machine.
 func apply_direction_to_velocity(_delta: float) -> void:
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
+	var move_speed: float = sprint_speed if should_sprint else speed
+	velocity.x = direction.x * move_speed
+	velocity.z = direction.z * move_speed
 	direction = Vector3.ZERO
