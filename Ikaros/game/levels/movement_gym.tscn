@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bupmrodlohajo"]
+[gd_scene load_steps=11 format=3 uid="uid://bupmrodlohajo"]
 
 [ext_resource type="Script" uid="uid://dshk5jq7fo0lx" path="res://core/scene/scene.gd" id="1_dq8hd"]
 [ext_resource type="PackedScene" uid="uid://dqpqdvcsj7nsd" path="res://game/assets/floor_5x5.tscn" id="1_w83jg"]
 [ext_resource type="PackedScene" uid="uid://byueo6oe0tjn7" path="res://game/assets/character.tscn" id="3_k15d2"]
+[ext_resource type="PackedScene" uid="uid://dgkbabltxjw2t" path="res://game/assets/big_box.tscn" id="5_huf1s"]
 [ext_resource type="PackedScene" uid="uid://k082b3voi8di" path="res://game/assets/red_pickup.tscn" id="9_5850r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a575k"]
@@ -111,6 +112,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
 
 [node name="Character" parent="." instance=ExtResource("3_k15d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.259023, -2)
+jump_velocity = 4.5
+jump_max_height = 1.0
 
 [node name="Box01" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99465, 2.65999, -1.99644)
@@ -136,3 +139,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8764, 0.25, -13.614)
 is_magnetic = true
 faces_player = true
+
+[node name="BigBox01" parent="." instance=ExtResource("5_huf1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, -11)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9118, 1.61184, -10.9906)
+double_sided = false
+text = "Player should be able to jump on top of this with a single jump"
+autowrap_mode = 2
+width = 350.0
