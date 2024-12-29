@@ -1,8 +1,11 @@
 [gd_resource type="Resource" script_class="IkarosPlayerSettings" load_steps=2 format=3 uid="uid://ck2y0fk5ywyr4"]
 
-[ext_resource type="Script" path="res://core/player/player_settings.gd" id="1_clhqx"]
+[ext_resource type="Script" uid="uid://b3q0ocky7xqrh" path="res://core/player/player_settings.gd" id="1_clhqx"]
 
 [resource]
 script = ExtResource("1_clhqx")
+can_sprint = true
 can_move_in_air = true
+can_jump_when_falling = false
+max_jumps = 2
 face_movement_direction = true

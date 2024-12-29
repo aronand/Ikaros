@@ -62,7 +62,7 @@ func _process(_delta: float) -> void:
 
 	# Block player from initiating sprinting while in the air.
 	# NOTE/BUG: Player will be sprinting as long as they touch the ground again.
-	if Ikaros.player.state.name not in Ikaros.player.IN_AIR_STATES:
+	if player_can_sprint():
 		Ikaros.player.should_sprint = Input.is_action_pressed("sprint")
 
 
@@ -102,6 +102,14 @@ func player_can_jump() -> bool:
 			return false
 
 	return true
+
+
+## Verifies that the player is able to sprint.
+func player_can_sprint() -> bool:
+	if Ikaros.player_settings.can_sprint == false:
+		return false
+
+	return Ikaros.player.state.name not in Ikaros.player.IN_AIR_STATES
 
 
 ## Returns a Vector2 created from movement input. Defaults to returning the input from
