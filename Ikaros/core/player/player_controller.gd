@@ -59,6 +59,10 @@ func _process(_delta: float) -> void:
 
 	if _direction:
 		Ikaros.player.move(_relative_direction)
+
+	# Block player from initiating sprinting while in the air.
+	# NOTE/BUG: Player will be sprinting as long as they touch the ground again.
+	if Ikaros.player.state.name not in Ikaros.player.IN_AIR_STATES:
 		Ikaros.player.should_sprint = Input.is_action_pressed("sprint")
 
 
