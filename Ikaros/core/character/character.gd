@@ -17,7 +17,6 @@ const IN_AIR_STATES: Array[String] = [
 ## Character's jump speed
 @export var jump_velocity: float = 4.0
 
-
 ## Controls jumping. When true, the state machine will move to jumping state
 ## when in a state that can transition to a jump.
 var should_jump: bool = false
