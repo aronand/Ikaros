@@ -17,8 +17,6 @@ const IN_AIR_STATES: Array[String] = [
 ## Character's jump speed
 @export var jump_velocity: float = 4.0
 
-## Character's maximum jump height
-@export var jump_max_height: float = 0.5
 
 ## Controls jumping. When true, the state machine will move to jumping state
 ## when in a state that can transition to a jump.

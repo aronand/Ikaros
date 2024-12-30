@@ -81,10 +81,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		Ikaros.player.jump()
 		return
 
-	if Input.is_action_just_released("jump"):
-		Ikaros.player.should_jump = false
-		return
-
 
 ## Verifies that the player is able to jump by checking the current state
 ## of the player, and settings defined in IkarosPlayerSettings.
