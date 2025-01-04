@@ -58,6 +58,8 @@ func _process(_delta: float) -> void:
 			_col_shape.rotation.y = _camera_root.rotation.y
 
 	if _direction:
+		if not Ikaros.player_settings.can_move_in_first_person:
+			_camera_controller.is_first_person = false
 		Ikaros.player.move(_relative_direction)
 
 	# Block player from initiating sprinting while in the air.

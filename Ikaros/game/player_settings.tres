@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource("1_clhqx")
+face_movement_direction = true
 can_sprint = true
+can_move_in_first_person = false
 can_move_in_air = true
 can_jump_when_falling = false
 max_jumps = 2
-face_movement_direction = true

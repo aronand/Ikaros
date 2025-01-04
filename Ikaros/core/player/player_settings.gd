@@ -8,6 +8,10 @@ extends Resource
 ## If true, player is able to sprint.
 @export var can_sprint: bool = true
 
+## If true, player can move in first person mode. Otherwise third person mode
+## is entered when movement is initialized.
+@export var can_move_in_first_person: bool = true
+
 ## If true, player has full control over movement while in the air.
 @export var can_move_in_air: bool = true
 
