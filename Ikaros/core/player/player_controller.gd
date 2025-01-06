@@ -50,7 +50,11 @@ func _process(_delta: float) -> void:
 	if _camera_controller.is_first_person:
 		_col_shape.rotation.y = _camera_root.rotation.y
 
-	if not _camera_controller.is_first_person and _direction and Ikaros.player.state.name != "dashing":
+	if (
+		not _camera_controller.is_first_person
+		and _direction
+		and Ikaros.player.state.name != "dashing"
+	):
 		if Ikaros.player_settings.face_movement_direction:
 			_col_shape.look_at(_col_shape.global_transform.origin - _relative_direction)
 			_col_shape.rotation.x = 0.0

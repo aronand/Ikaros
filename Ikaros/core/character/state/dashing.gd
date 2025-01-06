@@ -11,10 +11,11 @@ func enter(_previous_state_path: String, data: Dictionary = {}) -> void:
 	direction = data["direction"]  # Ensures that the direction never changes
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	character.velocity.x = direction.x * character.dash_velocity
 	character.velocity.z = direction.z * character.dash_velocity
-	var collided: bool = character.move_and_slide()  # CRITICAL: Will always collide because we are on the ground
+	character.move_and_slide()
+
 	if character.position.distance_to(start_position) >= character.dash_distance:
 		character.should_dash = false
 		finished.emit(IDLE)
