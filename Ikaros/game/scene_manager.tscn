@@ -18,6 +18,7 @@ metadata/_custom_type_script = ExtResource("1_rqs5t")
 
 [node name="IkarosCameraController" type="Node" parent="."]
 script = ExtResource("2_rili2")
+camera_height = 2.5
 metadata/_custom_type_script = ExtResource("2_rili2")
 
 [node name="IkarosPlayerController" type="Node" parent="."]
