@@ -5,6 +5,7 @@ const IDLE: String = "idle"
 const WALKING: String = "walking"
 const JUMPING: String = "jumping"
 const FALLING: String = "falling"
+const DASHING: String = "dashing"
 
 var character: IkarosCharacter
 

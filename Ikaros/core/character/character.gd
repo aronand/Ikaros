@@ -17,12 +17,21 @@ const IN_AIR_STATES: Array[String] = [
 ## Character's jump speed
 @export var jump_velocity: float = 4.0
 
+## Character's dash speed
+@export var dash_velocity: float = 6.0
+
+## Distance covered by character's dash
+@export var dash_distance: float = 4.0
+
 ## Controls jumping. When true, the state machine will move to jumping state
 ## when in a state that can transition to a jump.
 var should_jump: bool = false
 
 ## Controls character movement speed.
 var should_sprint: bool = false
+
+## Controls dashing
+var should_dash: bool = false
 
 ## Controls movement direction. State machine will move to moving state if this
 ## is not equal to Vector3.ZERO

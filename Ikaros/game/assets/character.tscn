@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://byueo6oe0tjn7"]
+[gd_scene load_steps=14 format=3 uid="uid://byueo6oe0tjn7"]
 
 [ext_resource type="Script" uid="uid://ckuat6kpa3ame" path="res://core/character/character.gd" id="1_ut8hp"]
 [ext_resource type="Script" uid="uid://djnatmwq5iut2" path="res://core/state_machine.gd" id="2_kg8dc"]
 [ext_resource type="Script" uid="uid://cjtxvgpvit33a" path="res://core/character/state/idle.gd" id="3_1t2ls"]
-[ext_resource type="Script" uid="uid://t333d1rbe1jy" path="res://core/character/state/walking.gd" id="4_6atcd"]
-[ext_resource type="Script" uid="uid://d2ho5d6p8u7hk" path="res://core/character/state/falling.gd" id="5_d6h3d"]
-[ext_resource type="Script" uid="uid://b6xng3er5bs43" path="res://core/character/state/jumping.gd" id="6_exf6n"]
+[ext_resource type="Script" uid="uid://t333d1rbe1jy" path="res://core/character/state/walking.gd" id="4_pc8u2"]
+[ext_resource type="Script" uid="uid://d2ho5d6p8u7hk" path="res://core/character/state/falling.gd" id="5_g22je"]
+[ext_resource type="Script" uid="uid://b6xng3er5bs43" path="res://core/character/state/jumping.gd" id="6_01b5v"]
+[ext_resource type="Script" uid="uid://dn5q2jdmsotqi" path="res://core/character/state/dashing.gd" id="7_4q0jq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_51oe4"]
 radius = 0.4
@@ -51,13 +52,16 @@ script = ExtResource("2_kg8dc")
 script = ExtResource("3_1t2ls")
 
 [node name="walking" type="Node" parent="IkarosStateMachine"]
-script = ExtResource("4_6atcd")
+script = ExtResource("4_pc8u2")
 
 [node name="falling" type="Node" parent="IkarosStateMachine"]
-script = ExtResource("5_d6h3d")
+script = ExtResource("5_g22je")
 
 [node name="jumping" type="Node" parent="IkarosStateMachine"]
-script = ExtResource("6_exf6n")
+script = ExtResource("6_01b5v")
+
+[node name="dashing" type="Node" parent="IkarosStateMachine"]
+script = ExtResource("7_4q0jq")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04974, 0)
