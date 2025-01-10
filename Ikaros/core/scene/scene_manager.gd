@@ -29,7 +29,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _add_scene(scene: IkarosScene) -> void:
 	add_child(scene)
 	scene.owner = self
-	scene.init()
+	scene.init(camera_controller)
 	current_scene = scene
 
 

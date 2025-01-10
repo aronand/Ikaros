@@ -6,12 +6,11 @@ extends IkarosNode
 var camera_controller: IkarosCameraController
 
 
-func init() -> void:
-	var camera_controller_nodes: Array[Node] = owner.find_children("", "IkarosCameraController")
-	camera_controller = camera_controller_nodes.front() as IkarosCameraController
+func init(camera_controller: IkarosCameraController) -> void:
+	self.camera_controller = camera_controller
 
-	if camera_controller == null:
-		log_error("Scene has no IkarosCameraController node.")
+	if self.camera_controller == null:
+		log_error("Scene has no reference to the IkarosCameraController.")
 		Ikaros.quit()
 		return
 
